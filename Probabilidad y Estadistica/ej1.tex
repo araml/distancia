@@ -17,10 +17,135 @@
 %\setlength\parindent{0pt}
 \date{\vspace{-5ex}}
 
-\title{Ejercicio 1}
 \makeindex
 
 \begin{document}
-\maketitle
-Texto
+
+\bigskip
+
+\centerline {Leandro Javier Raffo LU:945/12}
+
+
+\hfill\newline
+
+\section*{Ejercicio 1}
+
+\noindent\textbf{a)} Queremos calcular la probabilidad de que Lucía gane el sorteo, es decir
+queremos ver la probabilidad de que la moneda que tire Marcos sea cara o seca
+con respecto a lo que eligió Lucía con su moneda no cargada. Como la moneda de
+Lucía nos separa el espacio en 2 particiones disjuntas podemos usar el teorema
+de probabilidad total del cual tenemos que, si S es el evento que salga ceca, C
+el evento que salga cara y G el evento de que lucia gane:
+
+$$P(G) = P(G|C)P(C) + P(G|S)P(S)$$
+
+Como la moneda de Lucía es justa tenemos que $P(S) = P(C) = \tfrac{1}{2}$ y como
+la probabilidad de ganar si elegimos cara es $p$ mientras que ceca es $1 - p$,
+obtenemos
+
+$$P(G) = p \frac{1}{2} + (1 -p) \frac{1}{2} = \frac{1}{2}$$
+
+En otras palabras este nuevo juego propuesto por Lucía es justo.
+
+\hfill
+\newline
+
+\noindent\textbf{b)} Aca nos piden calcular la probabilidad de que la moneda justa haya salido
+cara si Lucía gano el torneo, esto es solo condicionar la probabilidad de ganar
+el sorteo a que haya salido cara:
+
+$$P(C|G)$$
+
+En principio no sabemos como calcular esto, pero si aplicamos Bayes obtenemos
+
+$$P(C|G) = \dfrac{P(G|C) P(C)}{P(G)}$$
+
+La probabilidad de $P(G)$ la calculamos en $a)$ y $P(G|C)$ es lo mismo que la
+probabilidad de que si solo hubieramos elegido cara antes de tirar la moneda de
+Marcos, es decir $p$, de lo cual obtenemos que
+
+$$P(C|G) = \dfrac{p \tfrac{1}{2}}{\tfrac{1}{2}} = p$$
+
+\hfill
+\newline
+
+\noindent\textbf{c)} Nos piden probar que eventualmente el juego propuesto por
+Lucía termina, esto significa que o bien la probabilidad de sacar $SS$ ó $CC$
+infinitas veces sea $0$ o la probabilidad de sacar $SC$ ó $CS$ en infinitas
+tiradas sea 1. Vamos a probar lo segundo.
+
+Definimos el evento $SS$ como tirar 2 veces la
+moneda y que salga seca seca, es decir que su probabilidad es $(1 - p)^2$, y hacemos lo mismo para
+$CC$, $CS$, $SC$ con sus respectivas probabilidades $p^2, p(1 - p), (1 - p)p$.
+
+Vamos a dividir el espacio en todos los eventos que terminan en $SC$ ó $CS$,
+estos eventos son tiradas de $SS$ ó $CC$ seguidos por una última tirada de $SC$ o
+$CS$, tenemos el evento $T_0$ que es sacar de una $SC$ ó $CS$, el
+evento $T_1$ que es sacar $SS$ o $CC$ y luego $SC$ ó $CS$, el evento $T_2$ que
+es sacar dos veces $SS$ ó $CC$ y luego $SC$ ó $CS$ y repitiendo obtenemos una familia de
+eventos disjunta $T_i$ los cuales son todos tiras de monedas $SS$ ó $CC$
+seguidos de una ultíma tirada donde sale $SC$ ó $CS$.
+
+\begin{aligned}
+    &T_0 = (SS \text{ ó } CC) \\
+    &T_1 = (SS \text{ ó } CC)(SC \text{ ó } CS) \\
+    &T_2 = (SS \text{ ó } CC)(SS \text{ ó } CC)(SC \text{ ó } CS)\\
+    &\cdots \\
+    &T_n = \underbrace{(SS \text{ ó } CC) \cdots (SS \text{ ó } CC)}_{\text{n
+    veces}} (SC \text{ ó } CS)\\
+    &\cdots
+\end{aligned}
+
+\hfill \newline
+
+Para sacar $CS$ ó $SC$ tenemos que caer en alguno de estos eventos, es decir que
+para calcular la probabilidad de sacar $CS$ ó $SC$ tenemos que calcular la
+probabilidad del evento que es la unión de los $T_i$.
+
+Además conocemos la probabilidad de cada
+uno de estos eventos por separado, por ejemplo $T_0$ es la probabilidad de sacar
+$SC$ ó $CS$, como son disjuntos la probabilidad de esto es $$P(SC) + P(CS)
+= 2 p (1 - p)$$ con $T_1$ y $T_2$, etc además tenemos que las tiradas son
+independientes, las tiradas anteriores no afectan las que vienen y aplicando
+independencia se multiplican de lo cual sale que:
+
+\begin{aligned}
+    &P(T_1) = (P(CC) + P(SS))(P(SC) + P(CS)) = (p^2 + (1 - p)^2) 2p(1-p) \\
+    &P(T_2) = (P(CC) + P(SS))(P(CC) + P(SS))(P(SC) + P(CS)) = (p^2 + (1 - p)^2)^2
+2p(1-p) \\
+    &P(T_i) = (p^2 + (1 - p)^2)^i 2p(1-p)\\
+\end{aligned}
+
+\hfill\newline
+
+Ahora la probabilidad que queremos calcular es $$P\big(\bigcup\nolimits_{i}^{\infty}
+T_i\big)$$
+
+Como dijimos antes los $T_i$ son disjuntos por lo cual tenemos que
+
+    $$P\big(\bigcup\nolimits_{i = 0}^{\infty} T_i\big) =
+       \sum\nolimits_{i = 0}^{\infty} P(T_i) =
+       \sum\nolimits_{i = 0}^{\infty} (p^2 + (1 -p)^2)^i \,\, 2p(1-p) =
+       2p(1-p) \sum\nolimits_{i = 0}^{\infty}  (p^2 + (1 -p)^2)^i $$
+
+Como $p^2 + (1 - p)^2 < 1^{*}$ esto es una suma geométrica, a la cual le conocemos
+una fórmula cerrada $\tfrac{1}{1 - x}$, lo podemos expresar como
+
+    $$2p(1-p) \frac{1}{1 - (p^2 + (1-p)^2)} = $$
+    $$2p(1-p) \frac{1}{1 - (p^2 + 1 -2p + p^2)} = $$
+    $$2p(1-p) \frac{1}{- 2p^2 + 2p}$$
+    $$2p(1-p) \frac{1}{2p(1 - p)} = 1$$
+
+\noindent\textbf{d)} Procediendo igual que en el punto anterior pero en vez de
+tomar como fin del evento que salga $SC$ ó $CS$ solo tomamos uno de los dos
+vemos que el factor $2$ en el numerador no aparece (en vez de $P(SC \cup CS)$
+solo tenemos $P(CS)$ por ejemplo en el caso de que queremos ver la proba de
+"seca") y la suma geometrica al final termina dando $\tfrac{1}{2}$.
+
+\hfill\newline
+\hfill\newline
+
+\noindent\textbf{*} como $p < 1$, $p^2 < p$ de lo que sale $2p^2 - 2p < 0$ por
+lo que al expandir el cuadrado de la expresión tenemos $\underbrace{2p^2 - 2p}_{< 0} + 1 < 1$.
+
 \end{document}
