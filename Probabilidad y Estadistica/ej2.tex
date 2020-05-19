@@ -1,0 +1,146 @@
+\documentclass[leqno, 12pt, twoside, letterpaper]{book}
+\usepackage{silence}
+\usepackage{../packages/notas}
+\usepackage{../packages/lambda}
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=red,
+    linktoc=all,
+    hypertexnames=false,
+    linktocpage=true,
+}
+\usepackage{graphicx}
+
+\usepackage{pgfplots}
+\pgfmathdeclarefunction{poiss}{1}{%
+  \pgfmathparse{(#1^x)*exp(-#1)/(x!)}%
+}
+\usepackage{float}
+
+%\setlength\parindent{0pt}
+\date{\vspace{-5ex}}
+
+\makeindex
+
+\begin{document}
+
+\bigskip
+
+\centerline {\Large Trabajo práctico 2}
+\centerline {Leandro Javier Raffo LU:945/12 \quad  email: leandrojavr@gmail.com}
+
+\section*{Ejercicio 8}
+\noindent Nos piden la probabilidad de obtener k éxitos antes de r fracasos en una
+sucesión de ensayos Bernoulli.\\
+
+\noindent En una sucesión de ensayos Bernoulli la probabilidad de cada intento
+es independiente de la anterior y tenemos como probabilidad de éxito $p$ y de
+fracaso $(1 -p)$. Además nos piden que los éxitos ocurran (en total) antes que
+los fracasos, esto es que entre exitos y fracasos en los primeros $k + r - 1$
+intento tengamos $k$ éxitos. \\
+
+\noindent Esto lo podemos conseguir todas las posibles
+permutaciones de los órdenes de intentos y fracasos. La permutación es $(k + r -
+1)!$ pero como no distinguimos entre exitos y fracasos tenemos que sacar las
+permutaciones repetidas diviendo por $k!$ y $(r - 1)!$. Es decir que las
+permutaciones son
+
+$$ \dfrac{(k + r - 1)!}{k! r!} $$
+
+\noindent Esto es solo la permutación, falta agregar la probabilidad de los intentos, que
+como dijimos son independientes da
+
+$$ \dfrac{(k + r - 1)!}{k! r!} p^k (1-p)^{r-1}$$
+
+
+\section*{Ejercicio 11}
+
+Tenemos $X \sim Poisson(\lambda = 2)$ que representa la cantidad de cajones
+vendidos(demandados) por semana, además el minorista stockea 4 cajones por
+semana.
+
+\hfill\\
+a) Queremos ver la probabilidad de vender los 4 cajones durante la semana, esto
+no es nada más que
+
+$$P(X = 4) = p_X(4) = \dfrac{e^{-2} 2^4}{4!} = 0.09$$
+
+\hfill\\
+b) La probabilidad entre semanas es independiente una de la otra asi que vender
+todo el stock en al menos dos semanas es
+
+$$P(X = 4)^2 P(X \leq 3)^2$$
+
+Ahora como
+
+$$P(X \leq 3) = p_X(0) + p_X(1) + p_X(2) + p_X(3)$$
+$$P(X \leq 3) = \sum_{i = 0}^{3} \dfrac{e^{-2} 2^i}{i!}$$
+$$P(X \leq 3) =  e^{-2}(1 + 2 + 4/2 + 8/6) = 0.857$$
+
+Con lo cual
+
+$$P(X = 4)^2 P(X \leq 3)^2 = (0.09)^2 (0.857)^2 = 5.95 x 10^{-3}$$
+
+\hfill\\
+c) Para ser capaz de incumplir un pedido significa que nos demandaron más de 4
+cajones
+
+$$P(X > 4) = 1 - P(X \leq 4)$$
+
+Usando parte del punto b) tenemos
+
+$$P(X \leq 3) =  e^{-2}(1 + 2 + 4/2 + 8/6 + 16/24) = 0.947$$
+
+
+\hfill\\
+d) Para calcular esta probabilidad nos preguntamos cuantos cajones seria
+necesario vender para que la probabilidad sea menor que $0.1$, osea que si
+stockeamos $T$ cajones la probabilidad de venderlos todos sea muy chica, puesto
+en funcion de la probabilidad seria:
+
+$$P(X > T) \leq 0.1$$
+
+Pero esto es lo mismo que preguntar el $T$ para que
+
+$$1 - P(X \leq T) \geq 0.99$$
+
+Usando que
+
+$$P(X \leq T) = \sum_{i = 0}^{T} p_X(i) = \sum_{i = 0}^T \dfrac{e^{-2}
+2^i}{i!}$$
+
+Lo que queremos es que la última suma sea mayor que $0.99$ (Recordemos que
+converge a $1$).
+
+Sacando de factor común el $e^{-2}$ tenemos que ver que tan cerca está la suma
+de $e^2$, si tomamos $T = 7$ tenemos
+
+$$e^2 - (1 + 2 + 4/2 + 8/6 + 16/24 + 32/120 + 64/720 + 128/5040) = e^2 - 7.38
+\sim 0.008$$
+
+Osea que si tomamos $T = 7$ como la cantidad mínima de cajones la probabilidad
+de poder cumpliar todos los pedidos es mayor que $0.99$ ($\sim 0.992$)
+
+\hfill\\
+e) Acá la verdad que no entiendo que me esta pidiendo, el número de cajones
+vendidos por semana tiene una distribución de Poisson con $\lambda = 2$ que es
+la del siguiente gráfico (sigue hasta el infinito pero los valores están muy
+cerca de 0)
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+\begin{axis}[every axis plot post/.append style={
+  samples at = {0,...,20},
+  axis x line*=bottom,
+  axis y line*=left,
+  enlargelimits=upper}]
+  \addplot +[ycomb, mark=square*, color=red, mark options={fill=red}] {poiss(2)};
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\end{document}
