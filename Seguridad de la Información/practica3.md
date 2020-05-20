@@ -11,6 +11,69 @@ primer thumbnail. Estas imagenes tienen coordenadas GPS.
 
 ## Ejercicio 4
 
+Quiero verificar que el texto del correo es válido, para esto tenemos que
+- Confirmar que la clave pública del firmante es validad por las autoridades
+  certificantes
+- Obtener la clave pública del firmante
+- Desencriptar el hash y compararlo con el hash que se computa del texto plano
+- Verificar que ninguno de los certificados esté vencido
+
+Para obtener la clave pública del firmante usamos el siguiente comando de
+OpenSSL
+
+`openssl x509 -pubkey -in <certificado_firmante.crt> -out public_key.key`
+
+Por otro lado obtenemos el p7s del mail
+
+`openssl smime pk7out -in <mail> -text -out pkcs7.p7s`
+
+Y con esto podemos ver toda la cadena de certificados
+
+`openssl pkcs7 -in pkcs7.p7s -print_certs -text -out certs.pem`
+
+Adentro de certs.pem podemos buscar el hash (encriptado por el firmante) como
+también los otros hashes encriptados que verifican la cadena de firmas.
+
+Podemos explorar el pkcs7 con asn1parse
+
+`openssl asn1parse -in pkcs7.out`
+
+Y aca ver donde estan las firmas encriptadas.
+
+Para obtener el mensaje del mail podemos usar el comando verify de smime
+pero pasarle que no verifique, esto devuelve el texto plano del cuerpo a hashear
+
+`openssl smime -verify -in <mail> -noverify -out mail_body.txt`
+
+Una vez que tenemos la firma, la clave pública y el contenido del mail tenemos
+que verificar que coincidan, para eso desencriptamos usando la clave pública y
+el mensaje encriptado.
+
+`openssl rsault -verify -inkey public_key.key -in <encrypted_msg.bin> -pubin >
+decrypted_msg.bin`
+
+Una vez desencriptado lo podemos inspeccionar con asn1parse
+
+`openssl asn1parse -inform -der -in decrypted_msg.bin`
+
+Da un output de la forma
+
+`   0:d=0  hl=2 l=  33 cons: SEQUENCE
+    2:d=1  hl=2 l=   9 cons: SEQUENCE
+    4:d=2  hl=2 l=   5 prim: OBJECT            :sha1
+   11:d=2  hl=2 l=   0 prim: NULL
+   13:d=1  hl=2 l=  20 prim: OCTET STRING      [HEX DUMP]:9EDFCD2B397D9305A172549313FDBA65CECA0742
+`
+El hex dump es el hash del contenido, por otro lado nos dice que uso SHA1 para
+hashear.
+
+Asi que tenemos que hashear los contenidos del texto con sha1, para esto vamos a
+usar el comando dgst
+
+`openssl dgst -sha1 mail_body.txt`
+
+Y comparar el output de este mensaje con el de [HEX DUMP]
+
 ## Ejercicio 5
 
 ## Ejercicio 6
