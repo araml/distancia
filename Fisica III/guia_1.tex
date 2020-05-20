@@ -1,0 +1,35 @@
+\documentclass[leqno, 12pt, twoside, letterpaper]{book}
+\usepackage{packages/notas}
+\usepackage{esvect}
+
+\def\efield{\textbf{E}}
+
+\begin{document}
+
+
+\section*{Ejercicio 8}
+
+Queremos ver que el campo eléctrico va a mantener la simetría para los distintos casos
+
+\subsection*{a) Simetria traslacional}
+
+El objetivo es ver que  $\,\efield(\vv{r}) = \efield(\vv{r} + \vv{a})$, si expandimos la integral del campo tenemos
+
+\[ \efield(\vv{r}) = k \int \lambda(\vv{v}) \dfrac{(\vv{r} - \vv{v})}{|\vv{r} - \vv{v}|^3} dV \]
+
+\noindent si escribimos lo mismo para $\vv{r} + \vv{a}$ 
+
+
+\[ \efield(\vv{r} + \vv{a}) = k \int \lambda(\vv{v}) \dfrac{(\vv{r} + \vv{a} - \vv{v})}{|\vv{r} + \vv{a} - \vv{v}|^3} dV \]
+
+\noindent podemos tomar el cambio de variable $\vv{v}' = \vv{v} - \vv{a} $ con $dV' =  dV $ y obtener 
+
+
+\[ \efield(\vv{r} + \vv{a}) = k \int \lambda(\vv{v}' + \vv{a}) \dfrac{(\vv{r} - \vv{v'})}{|\vv{r} - \vv{v'}|^3} dV' \]
+
+\noindent Pero como además nos dijeron que la densidad de carga no cambia para las traslaciones $\lambda(\vv{v}') = \lambda(\vv{v}'+\vv{a})$
+
+$$ \efield(\vv{r} + \vv{a}) = k \int \lambda(\vv{v}') \dfrac{(\vv{r} - \vv{v'})}{|\vv{r} - \vv{v'}|^3} dV' =  \efield(\vv{r})
+$$
+
+\end{document}
