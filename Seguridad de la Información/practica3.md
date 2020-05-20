@@ -11,12 +11,38 @@ primer thumbnail. Estas imagenes tienen coordenadas GPS.
 
 ## Ejercicio 4
 
-Quiero verificar que el texto del correo es válido, para esto tenemos que
+Nos piden hacer todos los comandos a mano, pero primero podemos verificar que
+sea realmente válido, para esto podemos usar el comando smime y pasarle como
+argumento -verify
+
+`openssl smime -verify -in <mail>`
+
+Esto lamentablemente nos da como resultado
+
+`error: certificate has expired`
+
+Usando -startdate y -enddate en el certificado firmador vemos que
+
+`openssl x509 -startdate -enddate -noout -in <firmador>`
+
+devuelve
+
+`<Down>notBefore=Apr 15 00:00:00 2015 GMT
+notAfter=Apr 14 23:59:59 2016 GMT`
+
+Por obvias razones esto ya expiro. Por otro lado si corremos el mismo comando de
+smime pero con -no_check_time vemos que si pasa el checkeo, es decir que por lo
+menos la cadena de firmas es correcta.
+
+Entonces queremos ver que la cadena de firmas y el contenido del mail es
+autentico, para esto tenemos que hacer lo siguiente
+
 - Confirmar que la clave pública del firmante es validad por las autoridades
   certificantes
 - Obtener la clave pública del firmante
 - Desencriptar el hash y compararlo con el hash que se computa del texto plano
-- Verificar que ninguno de los certificados esté vencido
+- Verificar que ninguno de los certificados esté vencido (Ya vimos que si lo
+  estan)
 
 Para obtener la clave pública del firmante usamos el siguiente comando de
 OpenSSL
@@ -58,12 +84,14 @@ Una vez desencriptado lo podemos inspeccionar con asn1parse
 
 Da un output de la forma
 
-`   0:d=0  hl=2 l=  33 cons: SEQUENCE
+```
+    0:d=0  hl=2 l=  33 cons: SEQUENCE
     2:d=1  hl=2 l=   9 cons: SEQUENCE
     4:d=2  hl=2 l=   5 prim: OBJECT            :sha1
    11:d=2  hl=2 l=   0 prim: NULL
    13:d=1  hl=2 l=  20 prim: OCTET STRING      [HEX DUMP]:9EDFCD2B397D9305A172549313FDBA65CECA0742
-`
+```
+
 El hex dump es el hash del contenido, por otro lado nos dice que uso SHA1 para
 hashear.
 
