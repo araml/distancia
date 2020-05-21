@@ -3,7 +3,8 @@
 \usepackage{esvect}
 
 \def\efield{\textbf{E}}
-
+\def\edensity{\textbf{D}}
+\def\vdiff{\textbf{dS}}
 \begin{document}
 
 
@@ -31,5 +32,44 @@ El objetivo es ver que  $\,\efield(\vv{r}) = \efield(\vv{r} + \vv{a})$, si expan
 
 $$ \efield(\vv{r} + \vv{a}) = k \int \lambda(\vv{v}') \dfrac{(\vv{r} - \vv{v'})}{|\vv{r} - \vv{v'}|^3} dV' =  \efield(\vv{r})
 $$
+
+\subsection*{b) y c)} 
+
+Salen haciendo lo mismo pero considerando las rotaciones y las reflexiones y considerando que $ R R^t \vv{v} = \vv{v}$
+
+\section*{Ejercicio 9}
+
+\textbf{a)} Queremos utilizar un argumento de simetría para ver la dirección del campo electrico en una linea de carga infinita.
+
+Asumiendo que la línea de carga esta en el eje $z$ y tomando un punto fuera de este en el espacio, siempre que tomemos una carga en la línea (fuera de la que apunta en sentido de la normal hacia el punto) podemos encontrar una carga opuesta que cancela la fuerza que ejerce en el eje $z$. Es decir que la fuerza apunta de forma radial a la línea, $\efield(\vv{v}) = E(r)_r \vv{e_r} $
+
+Nos piden hallar el campo usando gauss. Como solo tenemos una componente radial necesitamos una superficie de gauss que tenga simetría radial (horizontalmente) también. Podemos utilizar en este caso un cilindro.
+
+Centrando un cilindro en el centro del eje de coordenadas de altura $L$ y radio $r$, podemos usar el teorema de Gauss y ver que 
+
+\[ \int\displaylimits_{cilindro} \efield \cdot \vdiff = \dfrac{Q_{enc}}{\varepsilon_0}  \]
+
+La carga encerrada es la de la longitud de la linea encerrada en el cilindro, en este caso también $L$, por la densidad de carga $\lambda$, $Q_{enc} = 2L\lambda/\varepsilon_0$
+
+\hfill\\
+\noindent Si separamos la integral en las integrales de cada tapa y la integral de los costados tenemos
+
+\[ \int\displaylimits_{cilindro} \efield \cdot \vdiff = \int\displaylimits_{tapa\,\, superior} \efield \cdot \vv{e_z}dS  + \int\displaylimits_{costados} \efield \cdot \vv{e_r}dS  + \int\displaylimits_{tapa\,\, inferior} \efield \cdot (-\vv{e_z}dS )\]
+
+Como $\efield(\vv{v}) = E(r)_r \vv{e_r} $, entonces $E(r)_r \vv{e_r}  \cdot \vv{e}_z dS = 0$ y las integrales de la tapa se anulan. Por otro lado $\efield$ es constante en los costados ya que el radio del cilindro es constante por lo que podemos sacarlo afuera de la integral, el producto interno además da $1$.
+
+\[ \int\displaylimits_{cilindro} E(r)_r \vv{e_r} \cdot \vv{e_r}dS =   E(r)_r  \int\displaylimits_{costados}dS \]
+
+Como sabemos que el área del costado es $2\pi r L$ tenemos que
+
+\[ E(r)_r 2\pi  L = \dfrac{Q_{enc}}{\varepsilon_0} = \dfrac{L}{\varepsilon_0} \]
+
+entonces
+
+\[ E(r)_r = \dfrac{\lambda L}{2\pi r L \varepsilon_0}\]
+
+y como $\efield(\vv{v}) = E(r)_r \vv{e}_r$
+
+\[ \efield(v) = \dfrac{\lambda \vv{e}_r}{2\pi  \varepsilon_0r} \]
 
 \end{document}
