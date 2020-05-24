@@ -1,0 +1,23 @@
+\documentclass[leqno, 12pt, twoside, letterpaper]{book}
+\usepackage{packages/notas}
+\usepackage{circuitikz}
+
+\begin{document}
+
+
+\section*{Ejercicio 7}
+
+Tenemos el siguiente circuito
+
+\begin{circuitikz} 
+\draw (0,4) to[battery] (2,4)
+  	to[R=1.5$\Omega$] (4,4) -- (5,4) -- (5,2)
+  	to[R, l_=8$\Omega$] (0, 2) -- (0, 4);
+\draw (1, 2) -- (1, 3) -- (2, 3) to[R=4$\Omega$] (3, 3) -- (4, 3) -- (4, 2);
+\draw (1, 2) -- (1, 1) -- (2, 1) to[R=8$\Omega$] (3, 1) -- (4, 1) -- (4, 2);
+
+\end{circuitikz}
+
+
+
+\end{document}

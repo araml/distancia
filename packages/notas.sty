@@ -72,9 +72,10 @@
 \newcommand{\inciso}[1]{\noindent #1}
 
 \newcommand{\twopartdef}[4] {
+\arraycolsep=2pt\def\arraystretch{2.2}
     \left\{
         \begin{array}{ll}
-            #1 & \mbox{si } #2 \\
+            #1 & \mbox{si } #2 \\[2pt]
             #3 & \mbox{} #4
         \end{array}
     \right.

@@ -1,10 +1,13 @@
 \documentclass[leqno, 12pt, twoside, letterpaper]{book}
-\usepackage{packages/notas}
+\usepackage{../packages/notas}
 \usepackage{esvect}
 
 \def\efield{\textbf{E}}
 \def\edensity{\textbf{D}}
 \def\vdiff{\textbf{dS}}
+
+\def\lineInt#1#2#3{\int\displaylimits_{#2}^{#3} #1 \cdot d\textbf{l}}
+
 \begin{document}
 
 
@@ -41,7 +44,9 @@ Salen haciendo lo mismo pero considerando las rotaciones y las reflexiones y con
 
 \textbf{a)} Queremos utilizar un argumento de simetría para ver la dirección del campo electrico en una linea de carga infinita.
 
-Asumiendo que la línea de carga esta en el eje $z$ y tomando un punto fuera de este en el espacio, siempre que tomemos una carga en la línea (fuera de la que apunta en sentido de la normal hacia el punto) podemos encontrar una carga opuesta que cancela la fuerza que ejerce en el eje $z$. Es decir que la fuerza apunta de forma radial a la línea, $\efield(\vv{v}) = E(r)_r \vv{e_r} $
+Para esto vamos a ver dos cosas, una es que el campo electrico solo tiene parte vectorial radial y además solo depende del radio, es decir $\vv{\efield}(r\vv{e}_r + \phi\vv{e}_{\phi} + z\vv{e}_z ) = E(r) \vv{e}_r$ 
+
+%TODO: argumentar bien la simetria
 
 Nos piden hallar el campo usando gauss. Como solo tenemos una componente radial necesitamos una superficie de gauss que tenga simetría radial (horizontalmente) también. Podemos utilizar en este caso un cilindro.
 
@@ -56,20 +61,63 @@ La carga encerrada es la de la longitud de la linea encerrada en el cilindro, en
 
 \[ \int\displaylimits_{cilindro} \efield \cdot \vdiff = \int\displaylimits_{tapa\,\, superior} \efield \cdot \vv{e_z}dS  + \int\displaylimits_{costados} \efield \cdot \vv{e_r}dS  + \int\displaylimits_{tapa\,\, inferior} \efield \cdot (-\vv{e_z}dS )\]
 
-Como $\efield(\vv{v}) = E(r)_r \vv{e_r} $, entonces $E(r)_r \vv{e_r}  \cdot \vv{e}_z dS = 0$ y las integrales de la tapa se anulan. Por otro lado $\efield$ es constante en los costados ya que el radio del cilindro es constante por lo que podemos sacarlo afuera de la integral, el producto interno además da $1$.
+Como $\efield(\vv{v}) = E(r) \vv{e_r} $, entonces $E(r) \vv{e_r}  \cdot \vv{e}_z dS = 0$ y las integrales de la tapa se anulan. Por otro lado $\efield$ es constante en los costados ya que el radio del cilindro es constante por lo que podemos sacarlo afuera de la integral, el producto interno además da $1$.
 
-\[ \int\displaylimits_{cilindro} E(r)_r \vv{e_r} \cdot \vv{e_r}dS =   E(r)_r  \int\displaylimits_{costados}dS \]
+\[ \int\displaylimits_{cilindro} E(r) \vv{e_r} \cdot \vv{e_r}dS =   E(r)  \int\displaylimits_{costados}dS \]
 
 Como sabemos que el área del costado es $2\pi r L$ tenemos que
 
-\[ E(r)_r 2\pi  L = \dfrac{Q_{enc}}{\varepsilon_0} = \dfrac{L}{\varepsilon_0} \]
+\[ E(r) 2\pi  L = \dfrac{Q_{enc}}{\varepsilon_0} = \dfrac{L}{\varepsilon_0} \]
 
 entonces
 
-\[ E(r)_r = \dfrac{\lambda L}{2\pi r L \varepsilon_0}\]
+\[ E(r) = \dfrac{\lambda L}{2\pi r L \varepsilon_0}\]
 
 y como $\efield(\vv{v}) = E(r)_r \vv{e}_r$
 
 \[ \efield(v) = \dfrac{\lambda \vv{e}_r}{2\pi  \varepsilon_0r} \]
+
+
+Ahora nos piden calcular el potencial $V$ para esto tenemos que integrar desde un punto fuente a un punto $P$ que es donde queremos evaluar el potencial, es decir.
+
+\[ V(\vv{P}) = -\lineInt{\efield}{\vv{P}}{\mathfrak{F}}  \] 
+
+Como no nos importa la altura ni el angulo de rotación dado $P = (r, \phi, z)$ podemos tomar la curva $\sigma(t) = (t, \phi, z)$ con $t \in [1, r]$ (ahora vamos a ver porque el punto de referencia es $1$).
+
+Entonces $\sigma(t)' = (1, 0, 0)$ y tenemos que
+
+
+$$ V(\vv{P}) = -\lineInt{\efield}{\vv{P}}{\mathfrak{F}} = - \int\displaylimits_{1}^{r} \efield(\sigma(t)) \, dt  
+=  - \int\displaylimits_{1}^{r} \dfrac{\lambda L}{2\pi t L \varepsilon_0} \, dt 
+=  - \dfrac{\lambda }{2\pi  \varepsilon_0} \int\displaylimits_{1}^{r} \dfrac{1}{t} \, dt = $$
+$$ - \dfrac{\lambda }{2\pi  \varepsilon_0} \ln(t) \Big\rvert_{r}^{1} = - \dfrac{\lambda }{2\pi  \varepsilon_0} \ln(r) 
+$$ 
+
+Confirmemos que esto es correcto, tomemos el gradiente de $V$ y veamos que da $\efield$
+
+$$ - \nabla V = - \Big(\dfrac{dV}{dr} \vv{e}_r + \dfrac{dV}{d\phi} \vv{e}_{\phi} + \dfrac{dV}{dz} \vv{e}_z\Big) = - - \dfrac{\lambda}{2\pi \varepsilon_0} \dfrac{1}{r} \vv{e}_r =  \dfrac{\lambda}{2\pi \varepsilon_0 r} \vv{e}_r $$
+
+\hfill\\\hfill\\
+\textbf{b)} Usando un análisis análogo al punto a) vemos que el campo apunta radialmente hacia afuera es decir tenemos que $\efield(\vv{v}) = E(r) \vv{e}_r$ (Esto vale tanto como para adentro del volumen como afuera de este). También igual que en el anterior vamos a elegir como superficie gaussiana un cilindro de altura $L$, esta vez tenemos que analizar dos casos, en el exterior y en el interior. Además notemos que el radio del cilindro cargado es $R$ y el de la superficie gaussiana es $r$. 
+\hfill\\
+
+En el exterior tenemos de vuelta que  
+
+\[ \int\displaylimits_{cilindro} \efield \cdot \vdiff = \dfrac{Q_{enc}}{\varepsilon_0} = \dfrac{\lambda\pi R^2 L}{\varepsilon_0} \]
+
+Como $E(r)$ es constante si no cambia el radio
+
+\[ \int\displaylimits_{costados} E(r) \, dS = E(r) \int\displaylimits_{costados}  \, dS = E(r) 2 \pi r L\]
+
+\[ E(r) 2 \pi r L = \dfrac{\lambda\pi R^2 L}{\varepsilon_0} \Rightarrow  E(r) \vv{e}_r = \dfrac{\lambda R^2 }{2 r \varepsilon_0} \vv{e}_r\]
+
+En el caso interior vamos a tener casi lo mismo, solo que en vez de $R$ la carga contenida va a depender de $r$ y por lo tanto 
+
+\[ E(r) \vv{e}_r = \dfrac{\lambda r }{2 \varepsilon_0} \vv{e}_r\]
+
+Juntando tenemos
+
+$$ \efield(r) = \twopartdef{\dfrac{\lambda r }{2 \varepsilon_0} \vv{e}_r}{ r < R }{\dfrac{\lambda R^2 }{2 r \varepsilon_0} \vv{e}_r}{\textrm{si } r > R} $$
+
 
 \end{document}
