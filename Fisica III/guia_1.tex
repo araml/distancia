@@ -1,6 +1,9 @@
 \documentclass[leqno, 12pt, twoside, letterpaper]{book}
 \usepackage{../packages/notas}
 \usepackage{esvect}
+\usepackage[hidelinks,bookmarks=true]{hyperref}
+\usepackage[numbered]{bookmark}
+\hypersetup{ pdfpagemode = UseOutlines }
 
 \def\efield{\textbf{E}}
 \def\edensity{\textbf{D}}
@@ -11,6 +14,7 @@
 \begin{document}
 
 
+\pdfbookmark[section]{Ejercicio 8}{ej8}
 \section*{Ejercicio 8}
 
 Queremos ver que el campo eléctrico va a mantener la simetría para los distintos casos
@@ -40,8 +44,10 @@ $$
 
 Salen haciendo lo mismo pero considerando las rotaciones y las reflexiones y considerando que $ R R^t \vv{v} = \vv{v}$
 
-\section*{Ejercicio 9}
+\pdfbookmark[section]{Ejercicio 9}{ej9}
+\section*{Ejercicio 9} 
 
+\pdfbookmark[subsection]{a}{ej9a}
 \textbf{a)} Queremos utilizar un argumento de simetría para ver la dirección del campo electrico en una linea de carga infinita.
 
 Para esto vamos a ver dos cosas, una es que el campo electrico solo tiene parte vectorial radial y además solo depende del radio, es decir $\vv{\efield}(r\vv{e}_r + \phi\vv{e}_{\phi} + z\vv{e}_z ) = E(r) \vv{e}_r$ 
@@ -52,14 +58,14 @@ Nos piden hallar el campo usando gauss. Como solo tenemos una componente radial 
 
 Centrando un cilindro en el centro del eje de coordenadas de altura $L$ y radio $r$, podemos usar el teorema de Gauss y ver que 
 
-\[ \int\displaylimits_{cilindro} \efield \cdot \vdiff = \dfrac{Q_{enc}}{\varepsilon_0}  \]
+\[ \oint\displaylimits_{\textrm{cilindro}} \efield \cdot \vdiff = \dfrac{Q_{enc}}{\varepsilon_0}  \]
 
 La carga encerrada es la de la longitud de la linea encerrada en el cilindro, en este caso también $L$, por la densidad de carga $\lambda$, $Q_{enc} = 2L\lambda/\varepsilon_0$
 
 \hfill\\
 \noindent Si separamos la integral en las integrales de cada tapa y la integral de los costados tenemos
 
-\[ \int\displaylimits_{cilindro} \efield \cdot \vdiff = \int\displaylimits_{tapa\,\, superior} \efield \cdot \vv{e_z}dS  + \int\displaylimits_{costados} \efield \cdot \vv{e_r}dS  + \int\displaylimits_{tapa\,\, inferior} \efield \cdot (-\vv{e_z}dS )\]
+\[ \oint\displaylimits_{cilindro} \efield \cdot \vdiff = \int\displaylimits_{\textrm{tapa superior}} \efield \cdot \vv{e_z}dS  + \int\displaylimits_{\textrm{costados}} \efield \cdot \vv{e_r}dS  + \int\displaylimits_{\textrm{tapa inferior}} \efield \cdot (-\vv{e_z}dS )\]
 
 Como $\efield(\vv{v}) = E(r) \vv{e_r} $, entonces $E(r) \vv{e_r}  \cdot \vv{e}_z dS = 0$ y las integrales de la tapa se anulan. Por otro lado $\efield$ es constante en los costados ya que el radio del cilindro es constante por lo que podemos sacarlo afuera de la integral, el producto interno además da $1$.
 
@@ -97,13 +103,15 @@ Confirmemos que esto es correcto, tomemos el gradiente de $V$ y veamos que da $\
 
 $$ - \nabla V = - \Big(\dfrac{dV}{dr} \vv{e}_r + \dfrac{dV}{d\phi} \vv{e}_{\phi} + \dfrac{dV}{dz} \vv{e}_z\Big) = - - \dfrac{\lambda}{2\pi \varepsilon_0} \dfrac{1}{r} \vv{e}_r =  \dfrac{\lambda}{2\pi \varepsilon_0 r} \vv{e}_r $$
 
-\hfill\\\hfill\\
+\hfill\\
+\pdfbookmark[subsection]{b}{ej9b}
+\hfill\\
 \textbf{b)} Usando un análisis análogo al punto a) vemos que el campo apunta radialmente hacia afuera es decir tenemos que $\efield(\vv{v}) = E(r) \vv{e}_r$ (Esto vale tanto como para adentro del volumen como afuera de este). También igual que en el anterior vamos a elegir como superficie gaussiana un cilindro de altura $L$, esta vez tenemos que analizar dos casos, en el exterior y en el interior. Además notemos que el radio del cilindro cargado es $R$ y el de la superficie gaussiana es $r$. 
 \hfill\\
 
 En el exterior tenemos de vuelta que  
 
-\[ \int\displaylimits_{cilindro} \efield \cdot \vdiff = \dfrac{Q_{enc}}{\varepsilon_0} = \dfrac{\lambda\pi R^2 L}{\varepsilon_0} \]
+\[ \oint\displaylimits_{\textrm{cilindro}} \efield \cdot \vdiff = \dfrac{Q_{enc}}{\varepsilon_0} = \dfrac{\lambda\pi R^2 L}{\varepsilon_0} \]
 
 Como $E(r)$ es constante si no cambia el radio
 
@@ -120,11 +128,12 @@ Juntando tenemos
 $$ \efield(r) = \twopartdef{\dfrac{\lambda r }{2 \varepsilon_0} \vv{e}_r}{ r < R }{\dfrac{\lambda R^2 }{2 r \varepsilon_0} \vv{e}_r}{\textrm{si } r > R} $$
 
 
+\pdfbookmark[section]{Ejercicio 11}{ej11}
 \section*{Ejercicio 11} 
 
 Queremos ver la carga contenida en el cilindro, usando Gauss y usando que el campo electrico se orienta hacia la tierra, por lo cual la integral de gauss sobre los costados es 0 y solo integramos las tapas ($T1$ la tapa superior y $T2$ la inferior), tenemos que
 
-\[ \int \efield \cdot \vdiff = \dfrac{20 \, V}{m} \int\displaylimits_{T1} dS +  \dfrac{300 \,V}{m}\int\displaylimits_{T2} dS = \dfrac{320 \, V}{m} \pi r^2 \]
+\[ \oint \efield \cdot \vdiff = \dfrac{20 \, V}{m} \int\displaylimits_{T1} dS +  \dfrac{300 \,V}{m}\int\displaylimits_{T2} dS = \dfrac{320 \, V}{m} \pi r^2 \]
 
 entonces
  

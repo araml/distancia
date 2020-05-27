@@ -1,0 +1,35 @@
+\documentclass[leqno, 12pt, twoside, letterpaper]{book}
+\usepackage{../packages/notas}
+\usepackage{esvect}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[numbered]{bookmark}
+\hypersetup{ pdfpagemode = UseOutlines }
+
+\def\ejercicio#1{\pdfbookmark[section]{Ejercicio #1}{ej#1}\section*{Ejercicio #1}}
+\def\itemEj#1{\pdfbookmark[subsection]{#1}{sub#1}\noindent\textbf{#1)}}
+
+\begin{document}
+
+\ejercicio{1}
+\itemEj{i} Como siempre en el caso electrostatico las cargas en los conductores
+    se van a distribuir sobre las superficies de los mismos, en este caso en el
+    conductor interno vamos a tener una carga externa de $1nC$, el conductor de
+    más afuera va a intentar compensar esta carga con una carga inducida en
+    superficie interna de $-1nC$, para ver esto solo basta considerar una superficie
+    que recorra internamente el conductor de más afuera, como el campo en este
+    tiene que ser $0$ la carga encerrada también, por lo que hay una carga que
+    cancela el $1nC$ del conductor de más adentro.
+    Externamente teniamos la carga de $2nC$ menos la carga que
+    contrarresto la carga interna, pero esta es $-1nC$ osea que en la superficie
+    externa vamos a ver $3nC$ de carga.\\
+
+\itemEj{ii} Si ambos conductores se tocan entonces vamos a pasar a tener un
+    conductor grande con un hueco interno, de vuelta la carga tiende a la
+    superficie externa por lo cual el borde interno no va a tener carga y vamos
+    a tener de vuelta $3nC$ de carga. \\
+
+\itemEj{iii} \hfill \\
+
+\ejercicio{3}
+
+\end{document}
