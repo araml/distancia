@@ -79,10 +79,13 @@ entonces
 
 \[ E(r) = \dfrac{\lambda L}{2\pi r L \varepsilon_0}\]
 
-y como $\efield(\vv{v}) = E(r)_r \vv{e}_r$
+y como $\efield(\vv{v}) = E(r)_r \vv{e}_r$ tenemos que
+
+\begin{exbox}
 
 \[ \efield(v) = \dfrac{\lambda \vv{e}_r}{2\pi  \varepsilon_0r} \]
 
+\end{exbox}
 
 Ahora nos piden calcular el potencial $V$ para esto tenemos que integrar desde un punto fuente a un punto $P$ que es donde queremos evaluar el potencial, es decir.
 
@@ -93,11 +96,14 @@ Como no nos importa la altura ni el angulo de rotación dado $P = (r, \phi, z)$ 
 Entonces $\sigma(t)' = (1, 0, 0)$ y tenemos que
 
 
-$$ V(\vv{P}) = -\lineInt{\efield}{\vv{P}}{\mathfrak{F}} = - \int\displaylimits_{1}^{r} \efield(\sigma(t)) \, dt  
+$$ -\lineInt{\efield}{\vv{P}}{\mathfrak{F}} = - \int\displaylimits_{1}^{r} \efield(\sigma(t)) \, dt  
 =  - \int\displaylimits_{1}^{r} \dfrac{\lambda L}{2\pi t L \varepsilon_0} \, dt 
-=  - \dfrac{\lambda }{2\pi  \varepsilon_0} \int\displaylimits_{1}^{r} \dfrac{1}{t} \, dt = $$
-$$ - \dfrac{\lambda }{2\pi  \varepsilon_0} \ln(t) \Big\rvert_{r}^{1} = - \dfrac{\lambda }{2\pi  \varepsilon_0} \ln(r) 
+=  - \dfrac{\lambda }{2\pi  \varepsilon_0} \int\displaylimits_{1}^{r} \dfrac{1}{t} \, dt = - \dfrac{\lambda }{2\pi  \varepsilon_0} \ln(t) \Big\rvert_{r}^{1} $$
+
+\begin{exbox}
+$$  V(\vv{P}) = - \dfrac{\lambda }{2\pi  \varepsilon_0} \ln(r) 
 $$ 
+\end{exbox}
 
 Confirmemos que esto es correcto, tomemos el gradiente de $V$ y veamos que da $\efield$
 
@@ -125,8 +131,9 @@ En el caso interior vamos a tener casi lo mismo, solo que en vez de $R$ la carga
 
 Juntando tenemos
 
+\begin{exbox}
 $$ \efield(r) = \twopartdef{\dfrac{\lambda r }{2 \varepsilon_0} \vv{e}_r}{ r < R }{\dfrac{\lambda R^2 }{2 r \varepsilon_0} \vv{e}_r}{\textrm{si } r > R} $$
-
+\end{exbox}
 
 \pdfbookmark[section]{Ejercicio 11}{ej11}
 \section*{Ejercicio 11} 
