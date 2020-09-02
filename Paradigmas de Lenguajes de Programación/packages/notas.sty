@@ -1,0 +1,113 @@
+% Package for my notes
+\ProvidesPackage{notas}
+
+\RequirePackage{makeidx}
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}%
+\RequirePackage{amsthm}
+\RequirePackage{titlesec}
+\RequirePackage{amsmath}
+%\RequirePackage{charter}
+\RequirePackage[bitstream-charter]{mathdesign}
+\RequirePackage{framed}
+\RequirePackage[right=1in, left=1in]{geometry}
+\RequirePackage{enumitem}
+\RequirePackage[strict]{changepage}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{multicol}
+\RequirePackage{mathtools}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}[chapter]
+\newtheorem{lem}[thm]{Lema}
+\newtheorem{cor}[thm]{Corolario}
+
+\theoremstyle{definition}
+\newtheorem*{ex}{Ejemplo}
+\newtheorem*{exs}{Ejemplos}
+\newtheorem*{thmx}{Teorema}
+\newtheorem{propi}[thm]{Propiedad}
+\newtheorem{prop}[thm]{Proposición}
+%\newtheorem{ej}[thm]{Ejercicio}
+
+\newtheorem*{notacion}{Notación:}
+
+\newcommand{\va}[1][\mathbb]{#1}
+\newcommand{\prob}[1][\mathbb]{#1}
+\newcommand{\dist}[1][\mathcal]{#1}
+\newcommand{\cond}[2]{\{ #1 \, | \, #2 \}}
+\newcommand{\set}[2]{\{ #1  \mid  #2 \}}
+\newcommand{\pset}[1]{\{ #1 \}}
+\newcommand{\naturals}[0]{\mathbb{N}}
+\newcommand{\sii}[0]{\Longleftrightarrow}
+\newcommand{\union}[0]{\cup}
+\newcounter{excounter}
+
+\newenvironment{solucion}[1]{\begin{adjustwidth}{1.5em}{1.5em}}{\end{adjustwidth}}
+\newenvironment{solucion*}[0]{}
+
+\newenvironment{teo}[1] {
+    \refstepcounter{thm}\noindent\textbf{Teorema~\thethm  #1:}
+}{}
+
+\newenvironment{dem}[0] {
+    \noindent\textbf{Demostración:}
+}{}
+
+\newenvironment{defi}[0] {
+    \refstepcounter{thm}
+    \noindent\textbf{Definición:}
+}{}
+
+\newtcolorbox{exbox}[0]{colback=white!80!gray, colframe=white}
+
+
+\newenvironment{ej}[1]{\noindent\stepcounter{excounter}
+\begin{exbox}\textbf{\arabic{excounter}} (#1).}{\end{exbox}}
+
+\newenvironment{exercise}[1]{\phantomsection
+\addcontentsline{toc}{section}{#1}
+\noindent\textbf{#1}}{}
+\newcommand{\inciso}[1]{\noindent #1}
+
+\newcommand{\twopartdef}[4] {
+    \left\{
+        \begin{array}{ll}
+            #1 & \mbox{si } #2 \\
+            #3 & \mbox{} #4
+        \end{array}
+    \right.
+}
+
+\newcommand{\grab}[3] {
+    \left.
+        \begin{array}{ll}
+            #1 & \\
+            #2
+        \end{array}
+    \right\} \implies #3
+}
+
+\newcommand{\twopartdeftwo}[4] {
+    \left\{
+        \begin{array}{ll}
+            #1 & \mbox{si } #2 \\
+            \\
+            #3 & \mbox{si } #4
+        \end{array}
+    \right.
+}
+
+\newenvironment{obs}
+  {\begin{framed}}
+  {\end{framed}}
+
+\newcommand{\formalDef}{\overset{\Delta}{=}}
+\newcommand{\object}[2]{#1 \, \formalDef \, \lbrack #2 \rbrack}
+\newcommand{\bracket}[1]{\lbrack#1\rbrack}
+
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
+\frenchspacing
+
+\endinput

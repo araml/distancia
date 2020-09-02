@@ -1,0 +1,115 @@
+\chapter{Practica Nº 5 - Programación Orientada a Objetos}
+
+\exercise{Ejercicio 13}
+\begin{solucion*}
+$$
+    \object{true}{if = \varsigma(v) \lambda(x)(\lambda(y) x),\,
+                  ifnot = \varsigma(v) \lambda(x)(\lambda(y) y),\,
+                  not = \varsigma(v) false}
+$$
+
+$$
+    \object{false}{if = \varsigma(v) \lambda(x)(\lambda(y) y),\,
+                   ifnot = \varsigma(v) \lambda(x)(\lambda(y) x),\,
+                   not = \varsigma(v) true}
+$$
+
+\end{solucion*}
+
+
+\exercise{Ejercicio 14}
+
+\begin{solucion*}
+
+\inciso{a)}
+\begin{align*}
+\object{origen}
+    {&x = 0, y = 0, \\
+    &mv\_x = \varsigma(s) \lambda(dx) s.x = s.x + dx, \\
+    &mv\_y = \varsigma(s) \lambda(dy) s.y = s.y + dy, \\
+    &mv = \varsigma(s) \lambda(dx)(\lambda(dy) s.mv\_y \, dy).mv\_x \, dx)}
+\end{align*}
+
+\inciso{b)}
+\begin{align*}
+\object{punto}
+    {&new = \varsigma(z) \bracket{ \begin{aligned}[t]
+                               &x = 0, y = 0,\\
+                               &\varsigma(s)z.mv\_x(s),\\
+                               &\varsigma(s)z.mv\_y(s),\\
+                               &\varsigma(s)z.mv(s)}
+        \end{aligned}\\
+     &mv\_x = \lambda(z)\lambda(dx) z.x = z.x + dx, \\
+     &mv\_y = \lambda(z)\lambda(dy) z.y = z.y + dy, \\
+     &mv = \lambda(z)\lambda(dx)(\lambda(dy) z.mv\_y \, dy).mv\_x \, dx }
+\end{align*}
+
+\inciso{c)}
+
+\[
+    \begin{prooftree}
+        \infer0[\bracket{OBJ}]{p \rightarrow p}
+        \hypo{\bracket{x = 0, y = 0, \varsigma(s)z.mv\_x(s),
+                           \varsigma(s)z.mv\_y(s),
+                           \varsigma(s)z.mv(s)}\pset{z \leftarrow p}}
+        \infer2[\bracket{SEL}]{\underbrace{punto}_{p}.new \rightarrow
+                            \bracket{x = 0, y = 0, \varsigma(s)p.mv\_x(s),
+                            \varsigma(s)p.mv\_y(s),
+                            \varsigma(s)p.mv(s)}}
+    \end{prooftree}
+\]
+
+\end{solucion*}
+
+\exercise{Ejercicio 15}
+
+\begin{solucion*}
+\begin{align*}
+\object{vacio}{&hayElementos = false, \\
+               &pertenece = \varsigma(s) \lambda(x) false, \\
+               &sacar = \varsigma(s) \lambda(x), \\
+               &agregar = \varsigma(s) \lambda(e) ((s.hayElementos
+               \leftleftharpoons true).pertenece \\
+               &\leftleftharpoons \lambda(x) \ITE{x = e}{true}{s.pertenece(x)}).sacar \\
+               &\leftleftharpoons \lambda(x) \ITE{x = e}{s.sacar(x)}{s.sacar(x).agregar(e)}}
+\end{align*}
+\end{solucion*}
+
+
+\exercise{Ejercicio 16}
+
+\begin{solucion*}
+
+
+\[
+    \begin{prooftree}
+        \hypo{\overbrace{p \rightarrow p'}^{(1)}}
+        \hypo{\overbrace{p.crecer(s)\pset{s \leftarrow p'}}^{(2)}\rightarrow o}
+        \infer2[\bracket{SEL}]{\underbrace{plantaClass.new}_{p}.crecer \rightarrow
+                            \bracket{}}
+    \end{prooftree}
+\]
+
+
+\begin{equation}\tag{1}
+    \scalebox{0.9}{
+    \begin{prooftree}
+        \infer0[\bracket{OBJ}]{p \rightarrow p}
+        \hypo{\bracket{altura = c.altura, crecer = \varsigma(s)c.crecer(s)
+        }\pset{c \leftarrow p} \rightarrow p'}
+        \infer2[\bracket{SEL}]{}
+    \end{prooftree}
+}
+\end{equation}
+
+\begin{equation}\tag{2}
+    \begin{prooftree}
+        \infer0[\bracket{OBJ}]{p \rightarrow p}
+        \hypo{\bracket{altura = c.altura, crecer = \varsigma(s)c.crecer(s)
+        }\pset{c \leftarrow p} \rightarrow p'}
+        \infer2[\bracket{SEL}]{}
+    \end{prooftree}
+\end{equation}
+\end{solucion*}
+
+

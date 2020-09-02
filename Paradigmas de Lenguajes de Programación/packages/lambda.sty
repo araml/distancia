@@ -1,0 +1,18 @@
+% Package for logic syntax used in lambda calculus proofs
+\ProvidesPackage{lambda}
+
+\RequirePackage{amsmath}
+\RequirePackage{ebproof}
+\RequirePackage{mathabx}
+\RequirePackage{rotating}
+%\RequirePackage{bussproofs}
+
+\newcommand{\juicio}[0]{\Gamma \triangleright}
+\newcommand{\juicioU}[1]{\Gamma, #1 \triangleright}
+\DeclareMathOperator{\iif}{if}
+\DeclareMathOperator{\tthen}{then}
+\DeclareMathOperator{\eelse}{else}
+\newcommand{\ITE}[3]{ \iif \, #1 \, \tthen \, #2 \, \eelse \, #3 }
+% variable tipo cuerpo
+\newcommand{\labs}[5]{ \lambda #1 : #2 . #3 : #4 \rightarrow #5}
+\endinput

@@ -1,0 +1,188 @@
+\documentclass[leqno, 12pt, twoside, letterpaper]{book}
+%\usepackage{packages/notas}
+\usepackage{packages/lambda}
+\renewcommand*\familydefault{\sfdefault} %%
+\usepackage{sfmath}
+
+\begin{document}
+
+\section*{TIPADO}
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{x : \sigma \in \Gamma}
+        \infer1[ (T-Var) ]{ \juicio x : \sigma }
+    \end{prooftree}
+    \qquad
+    \begin{prooftree}
+        \hypo{}
+        \infer1[ (T-True) ]{ \juicio true : Bool}
+    \end{prooftree}
+    \quad\quad
+    \begin{prooftree}
+        \hypo{}
+        \infer1[ (T-False) ]{ \juicio false : Bool}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{ \juicio M : Bool}
+        \hypo{ \juicio P : \sigma }
+        \hypo{ \juicio Q : \sigma }
+        \infer3[ (T-If) ]{\juicio \ITE{M}{P}{Q} : \sigma}
+    \end{prooftree}
+\]
+
+\[
+    \begin{prooftree}
+        \hypo{\juicioU{x : \sigma} M : \tau}
+        \infer1[ (T-Abs) ]{\juicio \labs{x}{\sigma}{M}{\sigma}{\tau} }
+    \end{prooftree}
+    \qquad
+    \begin{prooftree}
+        \hypo{\juicio M : \sigma \to \tau}
+        \hypo{\juicio N : \sigma}
+        \infer2[ (T-App) ]{\juicio M \, N : \tau}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \infer0[ (T-Zero) ]{ \juicio 0 : Nat}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{\juicio M : Nat}
+        \infer1[ (T-Succ) ]{\juicio succ(M) : Nat}
+    \end{prooftree}
+    \qquad
+    \begin{prooftree}
+        \hypo{\juicio M : Nat}
+        \infer1[ (T-Pred) ]{\juicio pred(M) : Nat}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{\juicio M : Nat}
+        \infer1[ (T-IsZero) ]{\juicio iszero(M) : Bool }
+    \end{prooftree}
+\]
+
+\newpage
+\section*{EVALUACION}
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{}
+        \infer1[ (E-IfTrue) ]{\ITE{true}{ M_2 }{ M_3 \to M_2 }}
+    \end{prooftree}
+    \qquad
+    \begin{prooftree}
+        \hypo{}
+        \infer1[ (E-IfFalse) ]{\ITE{false}{ M_2 }{ M_3 \to M_3 }}
+    \end{prooftree}
+\]
+
+
+\[
+    \begin{prooftree}
+        \hypo{M_1 \to M^{'}_{1}}
+        \infer1[ (E-If) ]{ \ITE{M_1}{M_2}{M_3} \to \ITE{M^{'}_1}{M_2}{M_3} }
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{M_1 \to M^{'}_{1}}
+        \infer1[ (E-App1  /  $\mu$ )]{M_1 M_2 \to M^{'}_{1} M_2}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{M_2 \to M^{'}_{2}}
+        \infer1[ (E-App2  /  $\nu$ )]{ (\lambda x : \sigma . M) M_2 \to
+        (\lambda x : \sigma . M) M^{'}_{2}}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{}
+        \infer1[ (E-AppAbs  /  $\beta$ )]{ (\lambda x : \sigma . M) V \to
+        M\{ x \leftarrow V \}}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \hypo{M_1 \to M^{'}_{1}}
+        \infer1[ (E-Succ) ]{ succ(M_1) \to succ(M^{'}_{1}}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \infer0[ (E-PredZero) ]{ pred(0) \to 0}
+    \end{prooftree}
+    \qquad
+    \begin{prooftree}
+        \infer0[ (E-PredSucc) ]{pred( \underline{n + 1}) \to \underline{n}}
+    \end{prooftree}
+\]
+
+
+\[
+    \begin{prooftree}
+        \hypo{M_1 \to M^{'}_{1}}
+        \infer1[ (E-Pred) ]{ pred(M_1) \to pred(M^{'}_{1})}
+    \end{prooftree}
+\]
+
+\hfill
+
+\[
+    \begin{prooftree}
+        \infer0[ (E-IsZeroZero) ]{iszero(0) \to true}
+    \end{prooftree}
+\]
+
+\hfill
+\[
+    \begin{prooftree}
+        \infer0[ (E-IsZeroSucc) ]{iszero(\underline{n+1}) \to false}
+    \end{prooftree}
+\]
+
+\hfill
+\[
+    \begin{prooftree}
+        \hypo{M_1 \to M^{'}_{1}}
+        \infer1[ (E-IsZero) ]{iszero(M_1) \to iszero(M^{'}_{1}}
+    \end{prooftree}
+\]
+\end{document}
