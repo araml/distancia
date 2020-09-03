@@ -13,3 +13,6 @@ longL [] = []
 longL (x:xs) = (length x):longL xs
 -- longL = map (\x -> length x)
 
+negativos :: [Float] -> [Float]
+negativos [] = []
+negativos (x:xs) = if x < 0 then  x:negativos(xs) else negativos(xs)
