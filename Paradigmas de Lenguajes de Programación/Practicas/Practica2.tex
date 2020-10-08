@@ -1,0 +1,35 @@
+\chapter{Practica 2}
+
+
+\exercise{Ejercicio 3} \\
+
+\inciso{a)} Marco los subtérminos de cada termino con corchetes y el árbol muestra como se
+separan, los subtérminos que quiero encontrar están en rojo. \\
+
+\Tree[.{$\lambda x$: Nat. $\underbrace{succ((\lambda x: Nat. \, x) \, x)}$}
+          [.{$succ(\underbrace{(\lambda x: Nat. \, x) \, x)})$}
+            [.{$\underbrace{(\lambda x: Nat. \, x)} \, \underbrace{x}$}
+              [.{$\lambda x: Nat. \, \underbrace{x}$}
+                [.{\color{red}{$x$}}
+                ]
+              ]
+              [.{\color{red}{$x$}}
+              ]
+            ]
+          ]
+     ]
+
+\inciso{b)} No?
+
+\inciso{c)} Aunque la gramática no lo hace, siempre asociamos a izquierda, es
+decir tenemos los subtérminos
+
+\[ \underbrace{u \, x} \underbrace{(y\, z)} \]
+
+\noindent por lo cual $x \, (y \, z)$ no puede ser un subtérmino de la
+expresión. \\
+
+
+\exercise{Ejercicio 4} \\
+
+\inciso{I.}
