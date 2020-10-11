@@ -33,3 +33,43 @@ expresión. \\
 \exercise{Ejercicio 4} \\
 
 \inciso{I.}
+
+\inciso{II.}
+
+\inciso{III.}
+
+\inciso{IV.} Como asocia a izquierda podemos ver que esto es subexpresion de
+$b$.\\
+
+
+\exercise{Ejercicio 5} \\
+
+\inciso{a)}
+
+\begin{center}
+\scalebox{0.45}{
+    \begin{prooftree}
+        \infer0[ (T-True) ]{\juicioVacio true : Bool}
+        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
+        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
+        \infer1[ (T-Succ) ]{\juicioVacio succ(0) : Nat}
+        \infer3[ (T-If) ]{ \juicioVacio \ITE{true}{0}{succ(0)} : Nat}
+    \end{prooftree}
+}
+\end{center}
+
+\inciso{b)}
+
+\begin{center}
+\scalebox{0.45}{
+    \begin{prooftree}
+        \infer0[ (T-True) ]{\juicioVacio true : Bool}
+        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
+        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
+        \infer1[ (T-Succ) ]{\juicioVacio succ(0) : Nat}
+        \infer3[ (T-If) ]{ \juicioVacio \ITE{true}{0}{succ(0)} : Nat}
+    \end{prooftree}
+}
+\end{center}
+
+
