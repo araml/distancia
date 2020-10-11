@@ -73,4 +73,34 @@ $b$.\\
 }
 \end{center}
 
+\inciso{c)}
 
+\begin{center}
+\scalebox{1}{
+    \begin{prooftree}
+        \infer0[]{\text{Error, el tipo de una lambda no puede ser Bool}}
+        \infer1[ (\text{No Tipa}) ]{\juicioVacio \labsApp{x}{Bool}{x} : Bool }
+        \infer0[]{}
+        \infer0[]{}
+        \infer3[ \TIf ]{ \juicioVacio \ITE{\labsApp{x}{Bool}{x}}{0}{succ(0)} : Nat}
+
+    \end{prooftree}
+}
+\end{center}
+
+\inciso{d)}  Tomando $\Gamma = \{x : Bool \rightarrow  Nat, y : Bool\}$
+
+\begin{center}
+\scalebox{1}{
+    \begin{prooftree}
+        \infer0[ ]{ \sigma = Bool, \tau = Nat}
+        \infer1[ \TVar ]{ x : \sigma \rightarrow \tau}
+        \infer0[]{ \sigma = Bool }
+        \infer1[ \TVar ]{\juicio y : \sigma }
+        \infer2[ \TApp ]{ \juicio x y: Nat}
+
+    \end{prooftree}
+}
+\end{center}
+
+\exercise{Ejercicio 6}
