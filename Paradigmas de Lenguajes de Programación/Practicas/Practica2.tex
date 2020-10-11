@@ -47,27 +47,28 @@ $b$.\\
 \inciso{a)}
 
 \begin{center}
-\scalebox{0.45}{
     \begin{prooftree}
-        \infer0[ (T-True) ]{\juicioVacio true : Bool}
-        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
-        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
-        \infer1[ (T-Succ) ]{\juicioVacio succ(0) : Nat}
-        \infer3[ (T-If) ]{ \juicioVacio \ITE{true}{0}{succ(0)} : Nat}
+        \infer0[ \TTrue ]{\juicioVacio true : Bool}
+        \infer0[ \TZero ]{\juicioVacio 0 : Nat}
+        \infer0[ \TZero ]{\juicioVacio 0 : Nat}
+        \infer1[ \TSucc ]{\juicioVacio succ(0) : Nat}
+        \infer3[ \TIf ]{ \juicioVacio \ITE{true}{0}{succ(0)} : Nat}
     \end{prooftree}
-}
 \end{center}
 
-\inciso{b)}
+\inciso{b)} Tomando $\Gamma = \{x : Nat, y : Bool\}$
 
 \begin{center}
-\scalebox{0.45}{
+\scalebox{0.65}{
     \begin{prooftree}
-        \infer0[ (T-True) ]{\juicioVacio true : Bool}
-        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
-        \infer0[ (T-Zero) ]{\juicioVacio 0 : Nat}
-        \infer1[ (T-Succ) ]{\juicioVacio succ(0) : Nat}
-        \infer3[ (T-If) ]{ \juicioVacio \ITE{true}{0}{succ(0)} : Nat}
+        \infer0[ \TTrue ]{\juicio true : Bool}
+        \infer0[ \TFalse ]{\juicio false : Bool}
+        \infer0[ \TVar ]{\juicioU{z: Bool} z : Bool}
+        \infer1[ \TAbs ]{\juicio \labs{z}{Bool}{z}{\sigma = Bool}{Bool}}
+        \infer0[ \TTrue ]{\juicio true : Bool}
+        \infer2[ \TApp ]{\juicio (\labsApp{z}{Bool}{z}) \, true : Bool}
+        \infer3[ \TIf ]{ \juicio \ITE{true}{false}{(\labsApp{z}{Bool}{z}) \, true} :
+                           Bool}
     \end{prooftree}
 }
 \end{center}

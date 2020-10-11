@@ -9,10 +9,23 @@
 
 \newcommand{\juicio}[0]{\Gamma \triangleright}
 \newcommand{\juicioU}[1]{\Gamma, #1 \triangleright}
+\newcommand{\juicioVacio}[0]{\emptyset \triangleright}
+\newcommand{\juicioSet}[1]{\{ #1 \} \triangleright }
 \DeclareMathOperator{\iif}{if}
 \DeclareMathOperator{\tthen}{then}
 \DeclareMathOperator{\eelse}{else}
 \newcommand{\ITE}[3]{ \iif \, #1 \, \tthen \, #2 \, \eelse \, #3 }
 % variable tipo cuerpo
+\newcommand{\labsApp}[3]{ \lambda #1 : #2 . #3 }
 \newcommand{\labs}[5]{ \lambda #1 : #2 . #3 : #4 \rightarrow #5}
+
+\def\TTrue{(T - True)}
+\def\TFalse{(T - False)}
+\def\TZero{(T - Zero)}
+\def\TIf{(T - If)}
+\def\TSucc{(T - Succ)}
+\def\TApp{(T - App)}
+\def\TAbs{(T - Abs)}
+\def\TVar{(T - Var)}
+
 \endinput
