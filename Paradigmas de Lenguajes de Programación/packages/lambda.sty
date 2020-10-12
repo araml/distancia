@@ -7,8 +7,8 @@
 \RequirePackage{rotating}
 %\RequirePackage{bussproofs}
 
-\newcommand{\juicio}[0]{\Gamma \triangleright}
-\newcommand{\juicioU}[1]{\Gamma, #1 \triangleright}
+\newcommand{\juicio}[0]{\Gamma \triangleright\,}
+\newcommand{\juicioU}[1]{\Gamma, #1 \triangleright\, }
 \newcommand{\juicioVacio}[0]{\emptyset \triangleright}
 \newcommand{\juicioSet}[1]{\{ #1 \} \triangleright }
 \DeclareMathOperator{\iif}{if}
@@ -18,6 +18,11 @@
 % variable tipo cuerpo
 \newcommand{\labsApp}[3]{ \lambda #1 : #2 . #3 }
 \newcommand{\labs}[5]{ \lambda #1 : #2 . #3 : #4 \rightarrow #5}
+
+\newcommand{\TTTrue}[1]{ \hypo[]{\checkmark} \infer1[(T - True)]{#1} }
+\newcommand{\TTFalse}[1] { \hypo[]{\checkmark} \infer1[(T - False)]{#1}}
+\newcommand{\TTVar}[1] { \hypo[]{\checkmark} \infer1[(T - Var)]{#1}}
+\newcommand{\TTZero}[1]{\hypo[]{\checkmark} \infer1[(T - Zero)]{#1}}
 
 \def\TTrue{(T - True)}
 \def\TFalse{(T - False)}

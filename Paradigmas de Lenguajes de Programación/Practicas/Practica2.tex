@@ -48,9 +48,9 @@ $b$.\\
 
 \begin{center}
     \begin{prooftree}
-        \infer0[ \TTrue ]{\juicioVacio true : Bool}
-        \infer0[ \TZero ]{\juicioVacio 0 : Nat}
-        \infer0[ \TZero ]{\juicioVacio 0 : Nat}
+        \TTTrue{\juicioVacio true : Bool}
+        \TTZero{\juicioVacio 0 : Nat}
+        \TTZero{\juicioVacio 0 : Nat}
         \infer1[ \TSucc ]{\juicioVacio succ(0) : Nat}
         \infer3[ \TIf ]{ \juicioVacio \ITE{true}{0}{succ(0)} : Nat}
     \end{prooftree}
@@ -61,11 +61,11 @@ $b$.\\
 \begin{center}
 \scalebox{0.65}{
     \begin{prooftree}
-        \infer0[ \TTrue ]{\juicio true : Bool}
-        \infer0[ \TFalse ]{\juicio false : Bool}
-        \infer0[ \TVar ]{\juicioU{z: Bool} z : Bool}
+        \TTTrue{\juicio true : Bool}
+        \TTFalse{\juicio false : Bool}
+        \TTVar{\juicioU{z: Bool} z : Bool}
         \infer1[ \TAbs ]{\juicio \labs{z}{Bool}{z}{\sigma = Bool}{Bool}}
-        \infer0[ \TTrue ]{\juicio true : Bool}
+        \TTTrue{\juicio true : Bool}
         \infer2[ \TApp ]{\juicio (\labsApp{z}{Bool}{z}) \, true : Bool}
         \infer3[ \TIf ]{ \juicio \ITE{true}{false}{(\labsApp{z}{Bool}{z}) \, true} :
                            Bool}
@@ -78,7 +78,7 @@ $b$.\\
 \begin{center}
 \scalebox{1}{
     \begin{prooftree}
-        \infer0[]{\text{Error, el tipo de una lambda no puede ser Bool}}
+        \hypo[]{\text{Error, el tipo de una lambda no puede ser Bool}}
         \infer1[ (\text{No Tipa}) ]{\juicioVacio \labsApp{x}{Bool}{x} : Bool }
         \infer0[]{}
         \infer0[]{}
@@ -93,9 +93,9 @@ $b$.\\
 \begin{center}
 \scalebox{1}{
     \begin{prooftree}
-        \infer0[ ]{ \sigma = Bool, \tau = Nat}
+        \hypo[ ]{ \sigma = Bool, \tau = Nat}
         \infer1[ \TVar ]{ x : \sigma \rightarrow \tau}
-        \infer0[]{ \sigma = Bool }
+        \hypo[]{ \sigma = Bool }
         \infer1[ \TVar ]{\juicio y : \sigma }
         \infer2[ \TApp ]{ \juicio x y: Nat}
 
