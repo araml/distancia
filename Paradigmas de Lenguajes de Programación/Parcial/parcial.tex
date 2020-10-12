@@ -1,0 +1,113 @@
+\documentclass[leqno, 12pt, twoside, letterpaper]{book}
+\usepackage{../packages/notas}
+\usepackage{../packages/lambda}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{qtree}
+\usepackage{minted}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=red,
+    linktoc=all,
+    hypertexnames=false,
+    linktocpage=true,
+}
+\usepackage{graphicx}
+
+%\setlength\parindent{0pt}
+\date{\vspace{-5ex}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+\title{Autoevaluación 2do cuatrimestre 2020}
+\makeindex
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newpage
+
+\exercise{Ejercicio 1 - Programación Funcional}\\
+
+
+\inciso{a)}
+\begin{minted}{Haskell}
+ejGrafo :: Grafo
+ejGrafo = G [1..9] (\x -> if mod x 2 == 0 then [1..9] else [])
+\end{minted}
+
+\inciso{b)}
+\begin{minted}{Haskell}
+nodoReflex :: Grafo -> Nodo -> Bool
+nodoReflex G ns f n = n elem (f n)
+\end{minted}
+
+\inciso{e)}
+\begin{minted}{Haskell}
+
+ocurrencias :: Int -> [Int] -> Int
+ocurrencias n ls = len (filter (\x -> x != n) ls)
+
+sinNodosRepetidos :: [Int] -> Bool
+sinNodosRepetidos ls = foldr (\x r ->
+                              if (ocurrencias x ls) != 1 then
+                                  false
+                              else
+                                true && r) true ls
+
+hamiltoniano :: Grafo -> Bool
+hamiltoniano G ns f = len (filter sinNodosRepetidos
+                                  (caminosDeLong  (g n f) (len ns - 1))
+\end{minted}
+
+\inciso{f)}
+\begin{minted}{Haskell}
+tieneCiclo :: Grafo -> Bool
+tieneCiclo G ns f = length (caminosDeLong (G ns f) (len ns + 1)) > 0
+\end{minted}
+
+\newpage
+
+\exercise{Ejercicio 2 - Cálculo Lambda Tipado}\\
+
+\inciso{a)}
+
+\[
+\begin{prooftree}
+    \hypo{\juicio N : \sigma}
+    \infer1[ (T - MatInit) ]{ \juicio MAT(N) : Mat_{\sigma}}
+\end{prooftree}
+\]
+
+\hfill
+
+\[
+\begin{prooftree}
+    \hypo{\juicio M : Mat_{\sigma} \quad  \juicio N, O: Nat}
+    \infer1[ (T - MatObs) ]{ \juicio M[N][P] : \sigma}
+\end{prooftree}
+\]
+
+\hfill
+
+\[
+\begin{prooftree}
+    \hypo{\juicio M : Mat_{\sigma} \quad \juicio P : \sigma \quad \juicio N, O: Nat}
+    \infer1[ (T - MatIns) ]{ \juicio M[N][P] \leftarrow P : Mat_{\sigma} }
+\end{prooftree}
+\]
+
+
+\hfill
+
+\[
+\begin{prooftree}
+    \hypo{\juicio M : Mat_{\sigma} \quad \juicio N : \sigma \rightarrow \tau}
+    \infer1[ (T - MatMap) ]{ \juicio map(M, N) : Mat_{\tau}}
+\end{prooftree}
+\]
+
+\end{document}
