@@ -144,7 +144,9 @@ Reescribiendo con el nuevo sigma
 }
 \end{center}
 
-Sigo la parte del $(*)$
+\newpage
+
+\noindent Sigo la parte del $(*)$
 
 \begin{center}
 \scalebox{0.9}{
@@ -158,12 +160,13 @@ Sigo la parte del $(*)$
 	\hypo[]{\checkmark}
 	\infer1[(T - Var)]{\juicio i : Nat}
 	\infer4[ (T - Ins) ]{\juicio m[i][i] \leftarrow 0 : MatInf_{Nat}}	
+	\infer1[]{*}
     \end{prooftree}
 }
 \end{center}
 
 
-Pongo la demostracion entera, para fines de completitud:
+\noindent Y la demostracion entera, para fines de completitud:
 
 \begin{center}
 \scalebox{0.65}{
@@ -185,5 +188,62 @@ Pongo la demostracion entera, para fines de completitud:
     \end{prooftree}
 }
 \end{center}
+
+\inciso{c)} En principio solo hay que agregar el valor $MatInf_{\sigma}$, para el resto nada ya que son valores que ya existen (inserción, observar). \\
+
+\newpage
+
+\inciso{d)} Como nos piden solo reducir en el caso de observar vamos a concentrar las reglas de evaluación ahí.
+
+\begin{center}
+\scalebox{0.95}{
+\begin{prooftree}
+    \hypo[]{ N \rightarrow N'}
+    \infer1[ (E - MatObsCol) ]{ M[N][N_2] \rightarrow M[N'][N_2]}
+\end{prooftree}
+\qquad
+\begin{prooftree}
+    \hypo[]{ N \rightarrow N'}
+    \infer1[ (E - MatObsRow) ]{ M[V][N] \rightarrow M[V][N']}
+\end{prooftree}
+}
+\end{center}
+
+\begin{center}
+\scalebox{1}{
+\begin{prooftree}
+    \hypo[]{ N \rightarrow N'}
+    \infer1[ (E - MatObsAssignCol) ]{ (M[N][N_2] \leftarrow P)[V][W] \rightarrow (M[N'][N_2] \leftarrow P)[V][W]}
+\end{prooftree}
+}
+\end{center}
+
+\begin{center}
+\scalebox{1}{
+\begin{prooftree}
+    \hypo[]{ N \rightarrow N'}
+    \infer1[ (E - MatObsAssignRow) ]{ (M[V][N] \leftarrow P)[V][W] \rightarrow (M[V][N'] \leftarrow P)[V][W])}
+\end{prooftree}
+}
+\end{center}
+
+\begin{center}
+\scalebox{1}{
+\begin{prooftree}
+    \hypo[]{ P \rightarrow P'}
+    \infer1[ (E - MatObsAssignValue) ]{ (M[V_2][W_2] \leftarrow P)[V_1][W_1] \rightarrow (M[V_2][W_2] \leftarrow P')[V_1][V_2]}
+\end{prooftree}
+}
+\end{center}
+
+\begin{center}
+\scalebox{1}{
+\begin{prooftree}
+    \hypo[]{ }
+    \infer1[ (E - MatObsAssignGetValue) ]{ (M[V_2][W_2] \leftarrow Y)[V_1][W_1] \rightarrow Y}
+\end{prooftree}
+}
+\end{center}
+
 
 \end{document}
