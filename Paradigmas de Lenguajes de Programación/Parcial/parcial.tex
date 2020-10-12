@@ -110,14 +110,78 @@ tieneCiclo G ns f = length (caminosDeLong (G ns f) (len ns + 1)) > 0
 \end{prooftree}
 \]
 
+\hfill\\
+
+
 \inciso{b)} Tomando $\Gamma = \pset{i : Nat, m : MatInf_{Nat}}$
 
 \begin{center}
 \scalebox{0.9}{
     \begin{prooftree}
-        \infer0[]{\juicio (m[i][i] \leftarrow 0) : MatInf_{\sigma} \quad \juicio \labsApp{x}{Nat}{isZero(x))} : \sigma \rightarrow Bool}
-        \infer1[ (T - Map) ]{ \juicio map((m[i][i] \leftarrow 0), \labsApp{x}{Nat}{isZero(x))} : MatInf_{Bool}}
+	\hypo[]{\text{Sigue en *}}
+	\infer1[ (T - Ins) ]{\juicio m[i][i] \leftarrow 0 : MatInf_{\sigma}}
+	\hypo[]{ \text{Nota: aca llegue a que el } \sigma \text{ inicial es } Nat. }
+	\infer1[]{\juicioU{x : Nat} isZero(x) : Bool}
+        \infer1[ (T - Abs) ]{\juicio \labsApp{x}{Nat}{isZero(x))} : \sigma \rightarrow Bool}
+        \infer2[ (T - Map) ]{ \juicio map((m[i][i] \leftarrow 0), \labsApp{x}{Nat}{isZero(x))} : MatInf_{Bool}}
+    \end{prooftree}
+}
+\end{center}
 
+Reescribiendo con el nuevo sigma
+
+\begin{center}
+\scalebox{0.9}{
+    \begin{prooftree}
+	\hypo[]{\text{Sigue en *}}
+	\infer1[ (T - Ins) ]{\juicio m[i][i] \leftarrow 0 : MatInf_{Nat}}	
+	\hypo[]{ \checkmark }
+	\infer1[ (T - Var) ]{\juicioU{x : Nat} x : Nat}
+	\infer1[ (T - IsZero) ]{\juicioU{x : Nat} isZero(x) : Bool}
+        \infer1[ (T - Abs) ]{\juicio \labsApp{x}{Nat}{isZero(x))} : Nat \rightarrow Bool}
+        \infer2[ (T - Map) ]{ \juicio map((m[i][i] \leftarrow 0), \labsApp{x}{Nat}{isZero(x))} : MatInf_{Bool}}
+    \end{prooftree}
+}
+\end{center}
+
+Sigo la parte del $(*)$
+
+\begin{center}
+\scalebox{0.9}{
+    \begin{prooftree}
+    	\hypo[]{\checkmark}
+	\infer1[(T - Var)]{\juicio m : MatInf_{Nat}}
+	\hypo[]{\checkmark}
+	\infer1[ (T - Zero)]{\juicio 0 : Nat}
+	\hypo[]{\checkmark}
+	\infer1[(T - Var)]{\juicio i : Nat}
+	\hypo[]{\checkmark}
+	\infer1[(T - Var)]{\juicio i : Nat}
+	\infer4[ (T - Ins) ]{\juicio m[i][i] \leftarrow 0 : MatInf_{Nat}}	
+    \end{prooftree}
+}
+\end{center}
+
+
+Pongo la demostracion entera, para fines de completitud:
+
+\begin{center}
+\scalebox{0.65}{
+    \begin{prooftree}
+    	\hypo[]{\checkmark}
+	\infer1[(T - Var)]{\juicio m : MatInf_{Nat}}
+	\hypo[]{\checkmark}
+	\infer1[ (T - Zero)]{\juicio 0 : Nat}
+	\hypo[]{\checkmark}
+	\infer1[(T - Var)]{\juicio i : Nat}
+	\hypo[]{\checkmark}
+	\infer1[(T - Var)]{\juicio i : Nat}
+	\infer4[ (T - Ins) ]{\juicio m[i][i] \leftarrow 0 : MatInf_{Nat}}	
+	\hypo[]{ \checkmark }
+	\infer1[ (T - Var) ]{\juicioU{x : Nat} x : Nat}
+	\infer1[ (T - IsZero) ]{\juicioU{x : Nat} isZero(x) : Bool}
+        \infer1[ (T - Abs) ]{\juicio \labsApp{x}{Nat}{isZero(x))} : Nat \rightarrow Bool}
+        \infer2[ (T - Map) ]{ \juicio map((m[i][i] \leftarrow 0), \labsApp{x}{Nat}{isZero(x))} : MatInf_{Bool}}
     \end{prooftree}
 }
 \end{center}
