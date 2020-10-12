@@ -103,4 +103,24 @@ $b$.\\
 }
 \end{center}
 
-\exercise{Ejercicio 6}
+\exercise{Ejercicio 6}\\
+
+\noindent Medio que se ven a ojo, no se si habría que hacer un juicio de tipado..
+
+\inciso{a)} Tipa si $\sigma = Nat$.\\
+\inciso{b)} Lo mismo con $\sigma = Bool$.\\
+\inciso{c)} De vuelta $\sigma = Nat$. \\
+
+
+\exercise{Ejercicio 7}
+
+\begin{center}
+\scalebox{1}{
+    \begin{prooftree}
+        \hypo[]{ \sigma = Nat, \tau = Bool}
+        \infer1[ \TVar ] {\juicioSet{x : \sigma} x : Nat}
+        \infer1[ \TSucc ]{ \juicioSet{x : \sigma} succ(x) : Nat }
+        \infer1[ \TIsZero ]{\juicioSet{x : \sigma} isZero(succ(x)) : \tau}
+    \end{prooftree}
+}
+\end{center}
