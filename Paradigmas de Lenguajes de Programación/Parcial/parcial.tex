@@ -78,7 +78,7 @@ tieneCiclo G ns f = length (caminosDeLong (G ns f) (len ns + 1)) > 0
 \[
 \begin{prooftree}
     \hypo{\juicio N : \sigma}
-    \infer1[ (T - MatInit) ]{ \juicio MAT(N) : Mat_{\sigma}}
+    \infer1[ (T - MatInit) ]{ \juicio MAT(N) : MatInf_{\sigma}}
 \end{prooftree}
 \]
 
@@ -86,7 +86,7 @@ tieneCiclo G ns f = length (caminosDeLong (G ns f) (len ns + 1)) > 0
 
 \[
 \begin{prooftree}
-    \hypo{\juicio M : Mat_{\sigma} \quad  \juicio N, O: Nat}
+    \hypo{\juicio M : MatInf_{\sigma} \quad  \juicio N, O: Nat}
     \infer1[ (T - MatObs) ]{ \juicio M[N][P] : \sigma}
 \end{prooftree}
 \]
@@ -95,8 +95,8 @@ tieneCiclo G ns f = length (caminosDeLong (G ns f) (len ns + 1)) > 0
 
 \[
 \begin{prooftree}
-    \hypo{\juicio M : Mat_{\sigma} \quad \juicio P : \sigma \quad \juicio N, O: Nat}
-    \infer1[ (T - MatIns) ]{ \juicio M[N][P] \leftarrow P : Mat_{\sigma} }
+    \hypo{\juicio M : MatInf_{\sigma} \quad \juicio P : \sigma \quad \juicio N, O: Nat}
+    \infer1[ (T - MatIns) ]{ \juicio M[N][P] \leftarrow P : MatInf_{\sigma} }
 \end{prooftree}
 \]
 
@@ -105,9 +105,21 @@ tieneCiclo G ns f = length (caminosDeLong (G ns f) (len ns + 1)) > 0
 
 \[
 \begin{prooftree}
-    \hypo{\juicio M : Mat_{\sigma} \quad \juicio N : \sigma \rightarrow \tau}
-    \infer1[ (T - MatMap) ]{ \juicio map(M, N) : Mat_{\tau}}
+    \hypo{\juicio M : MatInf_{\sigma} \quad \juicio N : \sigma \rightarrow \tau}
+    \infer1[ (T - MatMap) ]{ \juicio map(M, N) : MatInf_{\tau}}
 \end{prooftree}
 \]
+
+\inciso{b)} Tomando $\Gamma = \pset{i : Nat, m : MatInf_{Nat}}$
+
+\begin{center}
+\scalebox{0.9}{
+    \begin{prooftree}
+        \infer0[]{\juicio (m[i][i] \leftarrow 0) : MatInf_{\sigma} \quad \juicio \labsApp{x}{Nat}{isZero(x))} : \sigma \rightarrow Bool}
+        \infer1[ (T - Map) ]{ \juicio map((m[i][i] \leftarrow 0), \labsApp{x}{Nat}{isZero(x))} : MatInf_{Bool}}
+
+    \end{prooftree}
+}
+\end{center}
 
 \end{document}
