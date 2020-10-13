@@ -21,7 +21,7 @@
 
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
-\title{Autoevaluación 2do cuatrimestre 2020}
+\title{Autoevaluación 2do cuatrimestre 2020 \\ \Large Leandro Raffo LU: 945/12 } 
 \makeindex
 
 \begin{document}
@@ -42,13 +42,20 @@ ejGrafo = G [1..9] (\x -> if mod x 2 == 0 then [1..9] else [])
 \inciso{b)}
 \begin{minted}{Haskell}
 nodoReflex :: Grafo -> Nodo -> Bool
-nodoReflex G ns f n = n elem (f n)
+nodoReflex (G ns f) n = n elem (f n)
 \end{minted}
 
 \inciso{c)}
 \begin{minted}{Haskell}
 extenderCamino :: Grafo -> [Nodo] -> [[Nodo]]
-extenderCamino G ns f cs = map (\x -> ns ++ [x]) (f last cs)
+extenderCamino (G ns f) cs = map (\x -> ns ++ [x]) (f last cs)
+\end{minted}
+
+\inciso{d)}
+\begin{minted}{Haskell}
+caminosDeLong :: Grafo -> Int -> [[Nodo]]
+caminosDeLong (G ns f) = foldNat ([[n] | n <- ns] ++ [[]]) 
+				   (\r -> map (\x -> extenderCamino (G ns f) r)) 
 \end{minted}
 
 \inciso{e)}
@@ -72,14 +79,14 @@ hamiltoniano G ns f = len (filter sinNodosRepetidos
 \inciso{f)}
 \begin{minted}{Haskell}
 tieneCiclo :: Grafo -> Bool
-tieneCiclo G ns f = length (caminosDeLong (G ns f) (len ns + 1)) > 0
+tieneCiclo (G ns f) = length (caminosDeLong (G ns f) (len ns + 1)) > 0
 \end{minted}
 
 
 \inciso{g)}
 \begin{minted}{Haskell}
 caminos :: Grafo -> [[Nodo]]
-caminos G ns f = [c <- caminosDeLong (G ns f) l, l <- [1..]]
+caminos (G ns f) = [c <- caminosDeLong (G ns f) l, l <- [1..]]
 \end{minted}
 
 \newpage
