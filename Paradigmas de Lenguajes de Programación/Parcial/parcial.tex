@@ -336,4 +336,9 @@ $$
 \noindent II) $$ ((\labsApp{x}{Bool}{MAT(x)}[0][0] \leftarrow False) true)[0][pred(\underline{1})] \rightarrow_{(E - MatObsRow), (E - PredSucc)}$$
 $$ ((\labsApp{x}{Bool}{MAT(x)}[0][0] \leftarrow False) true)[0][0] \rightarrow_{ (E - MatObsRed), (E - AppsAbs / \beta)} $$
 $$ (MAT(True)[0][0] \leftarrow False)[0][0] \rightarrow_{ (E - ObsAssignGetValue)} False $$
+
+\hfill\\
+
+\noindent III) $$ map(MAT(0)[0][0] \leftarrow \underline{1}, \labsApp{x}{Nat}{isZero(x)})[0][0] \rightarrow_{(E - MapMatAssign)}$$
+$$ (\labsApp{x}{Nat}{isZero(x)}) \, \underline{1} \rightarrow_{(E - AppAbs / \beta)} isZero(\underline{1}) \rightarrow_{(E - IsZeroSucc)} False $$
 \end{document}
