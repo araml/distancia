@@ -239,7 +239,7 @@ Reescribiendo con el nuevo sigma
 \begin{center}
 \scalebox{1}{
 \begin{prooftree}
-    \hypo[]{ }
+    \hypo[]{ V_2 \equiv V_1 \land W_2 \equiv W_1}
     \infer1[ (E - MatObsAssignGetValue) ]{ (M[V_2][W_2] \leftarrow Y)[V_1][W_1] \rightarrow Y}
 \end{prooftree}
 }
@@ -312,4 +312,13 @@ Reescribiendo con el nuevo sigma
 }
 \end{center}
 
+
+\inciso{e)} I) 
+
+$$
+ (MAT(\labsApp{y}{Bool}{y})[\underline{1}][0] \leftarrow (\labsApp{x}{Bool}{true}))[0][\underline{1}] \rightarrow_{(E - MatObsAssignGetValue)} 
+  \labsApp{x}{Bool}{true} 
+$$
+
+II) $$ ((\$$
 \end{document}
