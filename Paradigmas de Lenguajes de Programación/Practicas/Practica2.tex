@@ -124,3 +124,34 @@ $b$.\\
     \end{prooftree}
 }
 \end{center}
+
+\exercise{Ejercicio 10}
+\inciso{a)} \[ (\labsApp{y}{\sigma}{x (\labsApp{x}{\tau}{x})})\{ x \leftarrow
+(\labsApp{y}{\rho}{\underbrace{x}_{\text{libre}} y}) \}  = \]
+
+\[ \labsApp{y}{\sigma}{x (\labsApp{x}{\tau}{x})}\{ x \leftarrow
+(\labsApp{y}{\rho}{\underbrace{x}_{\text{libre}} y}) \}  = \]
+
+\noindent Viendo solo el cuerpo de la función lambda tenemos
+
+\[ x (\labsApp{x}{\tau}{x})\{ x \leftarrow
+(\labsApp{y}{\rho}{\underbrace{x}_{\text{libre}} y}) \}  = \]
+
+
+\[ x\{ x \leftarrow (\labsApp{y}{\rho}{\underbrace{x}_{\text{libre}} y}) \}
+\quad (\labsApp{x}{\tau}{x}) \{ x \leftarrow (\labsApp{y}{\rho}{\underbrace{x}_{\text{libre}} y}) \}
+= \]
+
+\noindent Cambiando el nombre de la variable ligada
+
+\[ (\labsApp{y}{\rho}{x \, y})  \quad (\labsApp{w}{\tau}{w}) \{ x \leftarrow (\labsApp{y}{\rho}{\underbrace{x}_{\text{libre}} y}) \}
+= \]
+
+\[ (\labsApp{y}{\rho}{x \, y})  \quad (\labsApp{w}{\tau}{w}) \]
+
+\noindent y uniendo todo tenemos
+
+\begin{exbox}
+    \[ \labsApp{y}{\sigma}{ (\labsApp{y}{\rho}{x \, y})  \,
+    (\labsApp{w}{\tau}{w}) } \]
+\end{exbox}

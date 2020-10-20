@@ -16,8 +16,8 @@
 \DeclareMathOperator{\eelse}{else}
 \newcommand{\ITE}[3]{ \iif \, #1 \, \tthen \, #2 \, \eelse \, #3 }
 % variable tipo cuerpo
-\newcommand{\labsApp}[3]{ \lambda #1 : #2 . #3 }
-\newcommand{\labs}[5]{ \lambda #1 : #2 . #3 : #4 \rightarrow #5}
+\newcommand{\labsApp}[3]{ \lambda #1 : #2 . \,\, #3 }
+\newcommand{\labs}[5]{ \lambda #1 : #2 . \, #3 : #4 \rightarrow #5}
 
 \newcommand{\TTTrue}[1]{ \hypo[]{\checkmark} \infer1[(T - True)]{#1} }
 \newcommand{\TTFalse}[1] { \hypo[]{\checkmark} \infer1[(T - False)]{#1}}
@@ -27,6 +27,7 @@
 \def\TTrue{(T - True)}
 \def\TFalse{(T - False)}
 \def\TZero{(T - Zero)}
+\def\TIsZero{(T - IsZero)}
 \def\TIf{(T - If)}
 \def\TSucc{(T - Succ)}
 \def\TApp{(T - App)}

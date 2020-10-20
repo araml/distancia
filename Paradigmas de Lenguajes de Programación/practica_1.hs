@@ -25,9 +25,16 @@ dcmap f xs = dc (\x -> length x == 1) (\x -> [f (head x)])
 
 
 -- 10
+-- I
 foldrSum :: Num a => [a] -> a
 foldrSum = foldr (\x r -> x + r) 0
 
 foldrMap f = foldr (\x r -> (f x):r) []
 
 folderFilter f = foldr (\x r -> if f x then r else x:r) []
+
+-- III
+sumasParciales :: Num a => [a] -> [a]
+sumasParciales = foldl1 (\r x -> if length r > 0 then x:(x + head r):(tail r) else x:r)
+
+
