@@ -80,12 +80,15 @@ $$
 
 \begin{solucion*}
 
+\noindent Nota: abrevio pC para plantaClass.
 
 \[
     \begin{prooftree}
-        \hypo{\overbrace{p \rightarrow p'}^{(1)}}
-        \hypo{\overbrace{p.crecer(s)\pset{s \leftarrow p'}}^{(2)}\rightarrow o}
-        \infer2[\bracket{SEL}]{\underbrace{plantaClass.new}_{p}.crecer \rightarrow
+        \hypo{\overbrace{pC.new \rightarrow p'}^{(1)}}
+        \hypo{p' = [] }
+        \hypo{}
+        \hypo{}
+        \infer4[\bracket{SEL}]{\underbrace{plantaClass.new}_{p}.crecer \rightarrow
                             \bracket{}}
     \end{prooftree}
 \]
@@ -94,22 +97,45 @@ $$
 \begin{equation}\tag{1}
     \scalebox{0.9}{
     \begin{prooftree}
-        \infer0[\bracket{OBJ}]{p \rightarrow p}
-        \hypo{\bracket{altura = c.altura, crecer = \varsigma(s)c.crecer(s)
-        }\pset{c \leftarrow p} \rightarrow p'}
+        \infer0[\bracket{OBJ}]{pC \rightarrow pC}
+        \hypo{pC = \overbrace{\bracket{altura = c.altura, crecer = \varsigma(s)c.crecer(s)
+        }\pset{c \leftarrow pC}}^{(2)} }
         \infer2[\bracket{SEL}]{}
     \end{prooftree}
 }
 \end{equation}
 
 \begin{equation}\tag{2}
+    \scalebox{0.7}{
     \begin{prooftree}
-        \infer0[\bracket{OBJ}]{p \rightarrow p}
-        \hypo{\bracket{altura = c.altura, crecer = \varsigma(s)c.crecer(s)
-        }\pset{c \leftarrow p} \rightarrow p'}
-        \infer2[\bracket{SEL}]{}
+        \hypo{[altura = pC.altura, crecer = \varsigma(s)pC.crecer(s)]
+        \rightarrow [altura = 10, crecer = \varsigma(t)\varsigma(c) t.altura :=
+        t.altura + 10] }
+        \infer1[]{}
     \end{prooftree}
+}
 \end{equation}
+
+\noindent Reemplazando al principio tenemos
+
+\[
+    \begin{prooftree}
+        \hypo{\overbrace{pC.new \rightarrow p'}^{(1)}}
+        \hypo{p' =  [altura = 10, crecer = \varsigma(t)\varsigma(c) t.altura :=
+        t.altura + 10] }
+        \hypo{}
+        \hypo{}
+        \infer4[\bracket{SEL}]{\underbrace{plantaClass.new}_{p}.crecer \rightarrow
+                            \bracket{}}
+    \end{prooftree}
+\]
+
+
+\inciso{d)}
+
+    \[ malezaClass = plantaClass.crecer \leftleftarrows \varsigma(s)(\lambda(t)t.altura := (t.altura * 2))  \]
+
+
 \end{solucion*}
 
 

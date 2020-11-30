@@ -66,10 +66,11 @@
 \newenvironment{ej}[1]{\noindent\stepcounter{excounter}
 \begin{exbox}\textbf{\arabic{excounter}} (#1).}{\end{exbox}}
 
+%exercise
 \newenvironment{exercise}[1]{\phantomsection
 \addcontentsline{toc}{section}{#1}
 \noindent\textbf{#1}}{}
-\newcommand{\inciso}[1]{\noindent #1}
+
 
 \newcommand{\twopartdef}[4] {
 \arraycolsep=2pt\def\arraystretch{2.2}
