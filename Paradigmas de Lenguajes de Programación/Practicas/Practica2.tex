@@ -232,3 +232,93 @@ $b$.\\
         r) \rightsquigarrow O }}
     \end{prooftree}
 }
+
+\hfill\\
+
+
+\exercise{Ejercicio 18}
+
+Reglas de tipado:
+
+
+\[
+    \begin{prooftree}
+        \hypo{\juicio M : [\sigma]}
+        \hypo{\juicio N : \sigma \rightarrow \tau}
+        \infer2[ T-Map ]{\juicio MAP(M, N) : [\tau]}
+    \end{prooftree}
+\]
+
+
+Reglas de evaluacion:
+
+\[
+    \begin{prooftree}
+        \infer0[ (E-MapVacio) ]{\juicio MAP([]_{\sigma}, N) \rightarrow []_{\tau}}
+    \end{prooftree}
+\]
+\\
+\[
+    \begin{prooftree}
+        \infer0[ (E-Map) ]{\juicio MAP(M :: N, F) \rightarrow (F N) :: MAP(N, F) }
+    \end{prooftree}
+\]
+
+
+\hfill\\
+\exercise{Ejercicio 23}
+
+\inciso{a)}
+
+
+\[
+    \begin{prooftree}
+        \hypo{\juicio M_i : \sigma_i \rightarrow \tau}
+        \hypo{\sigma_i = \sigma_k \, \text{ si }\, k \neq i}
+        \hypo{i,k = 1\dots n}
+        \infer3[( T-Union )]{\juicio [M_1,\dots,M_n] : Union(\sigma_1, \dots
+        \sigma_n)_{\tau}}
+    \end{prooftree}
+\]
+\\
+\[
+    \begin{prooftree}
+        \hypo{\juicio [M_1, \dots, M_n] : Union(\sigma_1, \dots, \sigma_n)}
+        \hypo{\juicio M_k : \sigma_k \rightarrow \tau}
+        \hypo{\juicio N : \sigma_k}
+        \infer3[( T-AppUnion )]{\juicio [M_1,\dots,M_n] N : \tau}
+    \end{prooftree}
+\]
+
+\inciso{b)}
+
+Llamemos $\Gamma = \pset{y : Nat}$
+\\
+
+\scalebox{0.75}{
+    \begin{prooftree}
+        \hypo{\juicio [(\labsApp{x}{Bool}{y}, \labsApp{x}{Nat}{x})] }
+        \hypo{\juicio \labsApp{x}{Nat}{x} : Nat \rightarrow Nat }
+        \infer0[ (T-Var)]{ \juicio y : Nat (\text{ Osea }\sigma_k = Nat) }
+        \infer3[( T-AppUnion )]{ \juicio
+         ([ (\labsApp{x}{Bool}{y}, \labsApp{x}{Nat}{x})] y : Nat) : Nat }
+    \end{prooftree}
+}
+
+
+
+
+\inciso{c)}
+
+Valores $V := [M_1, \dots, M_n]$
+\\
+
+\inciso{d)}
+
+\[
+    \begin{prooftree}
+        \hypo{\text{Las mismas hipotesis que T-AppUnion}}
+        \infer1[( E-AppUnion )]{\juicio [M_1,\dots,M_n] N  \rightarrow  M_k N }
+    \end{prooftree}
+\]
+
