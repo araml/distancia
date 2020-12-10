@@ -155,3 +155,80 @@ $b$.\\
     \[ \labsApp{y}{\sigma}{ (\labsApp{y}{\rho}{x \, y})  \,
     (\labsApp{w}{\tau}{w}) } \]
 \end{exbox}
+
+
+
+\exercise{Ejercicio 17}
+\inciso{a)}
+
+
+\[
+    \begin{prooftree}
+        \infer0[ T-Vacio ]{\juicioVacio []_{\sigma}: [\sigma]}
+    \end{prooftree}
+    \qquad
+    \begin{prooftree}
+        \hypo{\juicio M : \sigma}
+        \hypo{\juicio N : [\sigma]}
+        \infer2[T-Encolar ]{\juicio M::N : [\sigma]}
+    \end{prooftree}
+\]
+\\
+\[
+    \begin{prooftree}
+        \hypo{\juicio M : [\sigma]}
+        \hypo{\juicio N : \tau}
+        \hypo{\juicioUnion{\pset{h:\sigma, t:[\sigma]}} O : \tau}
+        \infer3[(T-CaseOf)]{\juicio Case \, M \, of \{ [] \rightsquigarrow N |
+        h::t \rightsquigarrow O \}: [\tau]}
+    \end{prooftree}
+\]
+\\
+
+\[
+    \begin{prooftree}
+        \hypo{\juicio M : [\sigma]}
+        \hypo{\juicio N : \tau}
+        \hypo{\juicioUnion{\pset{h:\sigma, r:tau}} O : \tau}
+        \infer3[(T-foldR)]{\juicio foldr \, M \, base \rightsquigarrow N; rec(h,
+        r) \rightsquigarrow O : \tau}
+    \end{prooftree}
+\]
+\\
+
+\inciso{d)} Valores $ V:= []_{\sigma}, M::N$
+\hfill\\
+
+\inciso{e)}
+\[
+    \begin{prooftree}
+        \infer0[(E-CaseOfEmpty)]{\juicio Case \, []_{\sigma} \, of \{ [] \rightsquigarrow N |
+        h::t \rightsquigarrow O \} \rightarrow N}
+    \end{prooftree}
+\]
+\\
+\[
+    \begin{prooftree}
+        \hypo{\juicioVacio M : \sigma}
+        \hypo{\juicioVacio N : [\tau]}
+        \infer2[(E-CaseOf)]{\juicio Case \, M::N \, of \{ [] \rightsquigarrow N |
+        h::t \rightsquigarrow O \} \rightarrow O\pset{h \leftarrow M, t
+        \leftarrow N}}
+    \end{prooftree}
+\]
+\\
+\[
+    \begin{prooftree}
+        \infer0[(E-foldRVacio)]{\juicio foldr \, []_{\sigma} \, base \rightsquigarrow N; rec(h,
+        r) \rightsquigarrow O \rightarrow N}
+    \end{prooftree}
+\]
+\\
+\scalebox{0.8}{
+    \begin{prooftree}
+        \infer0[(E-foldR)]{\juicio foldr \, M::N \, base \rightsquigarrow N; rec(h,
+        r) \rightsquigarrow O \rightarrow O\pset{h \leftarrow M, rec \leftarrow
+        foldr \, N \, base \rightsquigarrow N; rec(h,
+        r) \rightsquigarrow O }}
+    \end{prooftree}
+}
