@@ -283,10 +283,9 @@ Reglas de evaluacion:
 \\
 \[
     \begin{prooftree}
-        \hypo{\juicio [M_1, \dots, M_n] : Union(\sigma_1, \dots, \sigma_n)}
-        \hypo{\juicio M_k : \sigma_k \rightarrow \tau}
+        \hypo{\juicio M : Union(\sigma_1, \dots, \sigma_n)_{\tau}}
         \hypo{\juicio N : \sigma_k}
-        \infer3[( T-AppUnion )]{\juicio [M_1,\dots,M_n] N : \tau}
+        \infer2[( T-AppUnion )]{\juicio M N : \tau}
     \end{prooftree}
 \]
 
@@ -295,30 +294,46 @@ Reglas de evaluacion:
 Llamemos $\Gamma = \pset{y : Nat}$
 \\
 
-\scalebox{0.75}{
+\scalebox{0.85}{
     \begin{prooftree}
-        \hypo{\juicio [(\labsApp{x}{Bool}{y}, \labsApp{x}{Nat}{x})] }
-        \hypo{\juicio \labsApp{x}{Nat}{x} : Nat \rightarrow Nat }
-        \infer0[ (T-Var)]{ \juicio y : Nat (\text{ Osea }\sigma_k = Nat) }
-        \infer3[( T-AppUnion )]{ \juicio
-         ([ (\labsApp{x}{Bool}{y}, \labsApp{x}{Nat}{x})] y : Nat) : Nat }
+        \hypo{ \checkmark }
+        \infer1[(T-Var)]{\juicioU{x: Bool} y : Nat}
+        \infer1[(T-Abs)]{ \juicio \labs{x}{Bool}{y}{\sigma_1}{Nat}}
+        \hypo{\checkmark}
+        \infer1[(T-Var)]{\juicioU{x : Nat} x : Nat}
+        \infer1[(T-Abs)]{ \juicio \labs{x}{Nat}{x}{\sigma_2}{Nat}}
+        \infer2[ (T-Union) ]{\juicio [(\labsApp{x}{Bool}{y}, \labsApp{x}{Nat}{x})] :
+        Union(\sigma_1, \sigma_2)_{Nat} }
+        \infer0[ (T-Var)]{ \juicio y : Nat }
+        \infer2[( T-AppUnion )]{ \juicio
+         ([ (\labsApp{x}{Bool}{y}, \labsApp{x}{Nat}{x})] y ) : Nat }
     \end{prooftree}
 }
 
 
 
-
 \inciso{c)}
 
-Valores $V := [M_1, \dots, M_n]$
+Valores $V := [V_1, \dots, V_n] $
 \\
 
 \inciso{d)}
+\[
+    \begin{prooftree}
+        \hypo{ M_k \rightarrow M'_k}
+        \hypo{ \text{ $V_i$ es valor para } i < k }
+        \infer2[( E-AppUnionCong )]{ [V_1, \dots, M_k, \dots M_n] N  \rightarrow
+         [V_1, \dots, M'_k, \dots M_n] N }
+    \end{prooftree}
+\]
+
 
 \[
     \begin{prooftree}
-        \hypo{\text{Las mismas hipotesis que T-AppUnion}}
-        \infer1[( E-AppUnion )]{\juicio [M_1,\dots,M_n] N  \rightarrow  M_k N }
+        \hypo{\juicioVacio V_k : \sigma \rightarrow \tau, \quad k \in
+        \pset{1,\dots,n}}
+        \hypo{\juicioVacio N : \sigma}
+        \infer2[( E-AppUnion )]{ [V_1,\dots, V_n] N  \rightarrow  V_k N }
     \end{prooftree}
 \]
 
