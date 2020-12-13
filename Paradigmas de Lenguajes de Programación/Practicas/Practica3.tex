@@ -1,0 +1,24 @@
+\chapter{Practica 2}
+
+
+\exercise{Ejercicio 7} \\
+
+\inciso{a)}
+
+\scalebox{0.85}{
+    \begin{prooftree}
+        \hypo{\checkmark}
+        \infer1[ \TVar ]{\juicioSet{x : Bool, y : Nat} y : Nat }
+        \infer1[\TSucc ]{ \juicioSet{x : Bool, y : Nat} suc(y) : Nat }
+        \infer1[ \TAbs ]{\juicioSet{x : Bool} \labsApp{y}{Nat}{suc(y)} : Nat \to Nat }
+        \hypo{\checkmark}
+        \infer1[ \TVar]{\juicioSet{x : Bool} x : Bool}
+        \hypo{ Bool <: Nat }
+        \infer2[ (S-Sub) ]{\juicioSet{x : Bool} x : Nat }
+        \infer2[ \TApp ]{\juicioSet{x : Bool} \labsApp{y}{Nat}{suc(y)} x : Nat}
+        \infer1[ \TAbs ]{ \juicioVacio
+        \labsApp{x}{Bool}{(\labsApp{y}{Nat}{suc(y)}) x} : Bool \to Nat }
+    \end{prooftree}
+}
+
+
