@@ -22,3 +22,35 @@
 }
 
 
+\exercise{Ejercicio 11} \\
+
+\inciso{a)}
+
+\scalebox{0.8} {
+    \begin{prooftree}
+        \hypo{\checkmark, \alpha = \pset{x : Int}}
+        \infer1[\TVar]{\juicio c : Comp_{\alpha} }
+        \hypo{\checkmark}
+        \infer1[(AxiomaXY)]{ \juicio  \pset{x = 1, y = 2} :  \pset{x : Int, y : Int} }
+        \infer1[(S - RcdWidth)]{\juicio  \pset{x = 1, y = 2} :  \pset{x : Int} }
+        \infer1[]{\juicio  \pset{x = 1, y = 2} : \alpha }
+        \hypo{\checkmark}
+        \infer1[\TZero]{\juicio 0 : Int}
+        \infer1[(T - Rcd)]{\juicio \pset{x = 0} : \pset{x : Int}}
+        \infer1{\juicio \pset{x = 0} : \alpha}
+        \infer3[(T - Comp)]{\Gamma = \juicioSet{c : Comp_{\pset{x : Int}}} \text{mejorSegún}(c, \pset{x =
+        1, y = 2}, \pset{x = 0}) : Bool}
+        \infer1[\TAbs]{\juicioVacio \labsApp{c}{Comp_{\pset{x : Int}}}{ \text{mejorSegún}(c, \pset{x =
+        1, y = 2}, \pset{x = 0})} : \sigma \to Bool}
+    \end{prooftree}
+}
+
+\inciso{b)}
+
+Queremos ver la regla de subtipado de $Comp_{\sigma}$. Comp compara dos valores
+del mismo tipo, por lo cual si tuviésemos $Comp_{\sigma} <: Comp_{\tau}$ si
+$\sigma <: \tau$ esto haría que no podamos comparar todo el dominio, por lo
+tanto tenemos que  $Comp_{\sigma} <: Comp_{\tau}$ si $\tau <: \sigma$, es decir
+la relación de subtipado es contravariante.
+
+\inciso{c)}
