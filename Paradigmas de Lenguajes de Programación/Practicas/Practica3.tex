@@ -56,7 +56,7 @@ la relación de subtipado es contravariante.
 \inciso{c)}
 
 \hfill\\
-\exercise{Ejercicio 12} \\
+\exercise{Ejercicio 13} \\
 
 \inciso{a)}
 \begin{solucion*}
@@ -94,3 +94,41 @@ quedaría:
 \end{prooftree}
 \]
 \end{solucion*}
+
+
+
+\hfill\\
+\exercise{Ejercicio 15} \\
+
+\inciso{a)}
+
+\begin{center}
+\begin{prooftree}
+    \hypo{\juicio \pi_i(M) : \sigma}
+    \hypo{\sigma <: \tau}
+    \infer2[(S-TuplaParcial)]{\juicio \pi_{i}(M) : \tau}
+\end{prooftree}
+\end{center}
+
+
+\hfill\\
+
+\inciso{b)}
+
+Tomando $\Gamma = \pset{p : \langle Nat \times Nat \rangle}$.
+\begin{center}
+\scalebox{0.95}{
+    \begin{prooftree}
+        \hypo{\checkmark}
+        \infer1[\TVar]{\juicioU{y : \times_2(Int)} y : \times_2(Int) }
+        \infer1[(T - Proj2)]{\juicioU{y : \times_2(Int)} \pi_2(y) : Int }
+        \hypo{Int <: Float}
+        \infer2[(S - TuplaParcial)]{\juicioU{y : \times_2(Int)} \pi_2(y) : Float }
+        \infer1[\TAbs]{\juicio \labsApp{y}{\times_2(Int)}{\pi_2(y)} : \times_2(Int) \to Float}
+        \hypo{\juicio p :  \times_2(Int) }
+        \infer2[\TApp]{\juicio (\labsApp{y}{\times_2(Int)}{\pi_2(y)) p} : Float}
+    \end{prooftree}
+}
+\end{center}
+
+\hfill\\

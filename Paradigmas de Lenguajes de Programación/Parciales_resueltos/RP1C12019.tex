@@ -1,0 +1,93 @@
+\documentclass[leqno, 12pt, twoside, letterpaper]{book}
+\usepackage{../packages/notas}
+\usepackage{../packages/lambda}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{qtree}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=red,
+    linktoc=all,
+    hypertexnames=false,
+    linktocpage=true,
+}
+\usepackage{graphicx}
+
+%\setlength\parindent{0pt}
+\date{\vspace{-5ex}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+\title{Solucion a los ejercicios de Paradigmas de Lenguajes de Programación}
+
+\begin{document}
+
+\exercise{1)} \\
+
+\inciso{a)}
+
+Podemos pensar al intervalo como un caso particular de una lista de enteros, ya
+que este modela una tira de enteros seguida. Por eso si tenemos una lista de
+algo a lo cual Int subtipe podemos reemplazar el tipo de la lista por el de un
+intervalo.
+
+\[
+\begin{prooftree}
+    \hypo{Int <: \sigma}
+    \infer1[ (S - SubIntervalo) ]{ intervalo <: [\sigma]}
+\end{prooftree}
+\qquad
+\begin{prooftree}
+    \hypo{Int <: \sigma}
+    \infer1[ (S - SubIntervalo) ]{ it_{intervalo} <: \it_{[\sigma]}}
+\end{prooftree}
+\]
+
+
+\hfill\\
+\inciso{b)}
+
+\inciso{II)} No va a tipar pues la función espera un intervalo, es decir vamos a
+tener que tipar la lista como intervalo y no tenemos ninguna regla para cambiar
+esto por lista y que tipe correctamente.
+
+
+\hfill\\
+\inciso{I)}
+
+\begin{center}
+    \scalebox{0.70}{
+        \begin{prooftree}
+            \hypo{ \checkmark}
+            \infer1[\TVar]{\juicioSet{i : It_{[Float]}} i : It_{[Float]}}
+            \infer1{\juicioSet{i : It_{[Float]}} proximo(i) : Float }
+            \infer1[\TAbs]{\juicioVacio \labsApp{i}{It_{[Float]}}{proximo(i)} :
+            It_{[Float]} \to Float }
+            \hypo{\juicioVacio -1 : Float}
+            \hypo{... \checkmark}
+            \infer1{\juicioVacio [0, \, Succ(0)] : Intervalo }
+            \hypo{ Int <: Float }
+            \infer1[ (S-SubInt) ] {Intervalo <: [Float] }
+            \infer2[ (S - Subs) ]{\juicioVacio [0, Succ(0)] : [Float]}
+            \infer2[ (T - ListaHead)]{\juicioVacio -1 :: [0, Succ(0)] : [Float] }
+            \infer1[(T - ItLista)]{\juicioVacio iterar(-1 :: [0, Succ(0)]) : It_{[Float]} }
+            \infer2[\TApp]{\juicioVacio (\labsApp{i}{It_{[Float]}}{proximo(i)})\,\, iterar(-1 ::
+            [0, Succ(0)]) : Float}
+        \end{prooftree}
+    }
+\end{center}
+
+\hfill\\
+
+\exercise{2)}
+\inciso{b)}
+\hfill\\
+
+\begin{align}
+    iS = [&next = \varsigma(s)[\varsigma(z)next = s.next(z),\, s.val = s.val + 1], \\
+          &val = 0 ]
+\end{align}
+
+\end{document}
